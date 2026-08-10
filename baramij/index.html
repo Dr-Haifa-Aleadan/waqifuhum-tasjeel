@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>التسجيل في البرامج — أكاديمية وَقِفُوهُم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   صفحة التسجيل في البرامج المدفوعة — أكاديمية وَقِفُوهُم
+
+   لماذا وُجدت هذه الصفحة:
+   موقع waqifuhum.com يعرض البرامج وأسعارها — لكن زرّ «سجّل الآن» في
+   كل برنامج مدفوع يفتح محادثة واتساب، لا صفحة شراء. فمن يريد الدفع
+   عليه أن يبدأ محادثة وينتظر ردّ إنسان، وأغلب الناس لا يفعلون.
+   هذه الصفحة تحذف الانتظار: يرى السعر، ويترك بياناته، ويدفع.
+
+   رابط واحد لكل برنامج:  ...paid-registration.html?p=masnad_w
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  --navy:#0D1B3E; --navy2:#1A2540; --navy3:#243154;
+  --gold:#C9A84C; --gold-lt:#E8C97A; --green:#4CAF50;
+  --ink:#F2F4F8; --dim:#A9B2C7; --line:rgba(201,168,76,.22);
+  --glass:rgba(255,255,255,.045);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1100px 620px at 78% -8%, #1E2C56 0%, transparent 58%),
+    radial-gradient(820px 520px at 8% 102%, #16224a 0%, transparent 55%),
+    var(--navy);
+  color:var(--ink); font-family:'Tajawal',system-ui,sans-serif;
+  line-height:1.85; min-height:100vh; padding:0 18px 70px;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.num{font-family:'Cairo',system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto}
+
+/* نجمة ثمانية — علامة الهوية */
+.star{width:46px;height:46px;margin:0 auto 18px;position:relative;opacity:.95}
+.star i{position:absolute;inset:0;border:1.6px solid var(--gold);border-radius:5px}
+.star i:last-child{transform:rotate(45deg)}
+
+header{text-align:center;padding:46px 0 8px}
+.kicker{color:var(--gold);font-size:12px;letter-spacing:.12em;font-weight:700;margin-bottom:12px}
+h1{font-size:clamp(25px,5vw,37px);font-weight:800;line-height:1.32;margin-bottom:12px}
+.tag{color:var(--dim);font-size:16px;max-width:52ch;margin:0 auto}
+
+/* بطاقة البرنامج */
+.prog{
+  background:linear-gradient(160deg,rgba(201,168,76,.10),var(--glass));
+  border:1px solid var(--line); border-radius:18px;
+  padding:26px 26px 24px; margin:30px 0 22px;
+  box-shadow:0 18px 48px rgba(0,0,0,.34);
+}
+.prog-top{display:flex;flex-wrap:wrap;gap:14px;align-items:baseline;justify-content:space-between;
+  padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.prog-name{font-family:'Cairo';font-size:21px;font-weight:800;color:var(--gold-lt)}
+.prog-by{display:block;font-size:13.5px;color:var(--dim);font-weight:400;margin-top:4px}
+.price{text-align:left;white-space:nowrap}
+.price b{font-family:'Cairo';font-size:31px;font-weight:800;color:#fff;line-height:1}
+.price span{display:block;font-size:12.5px;color:var(--dim);margin-top:3px}
+.price s{color:var(--dim);opacity:.6;font-size:16px;margin-left:8px}
+
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.pill{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:99px;
+  padding:5px 13px;font-size:12.5px;color:var(--gold-lt)}
+
+.incl{list-style:none;display:flex;flex-direction:column;gap:9px}
+.incl li{padding-right:26px;position:relative;font-size:15px;color:var(--ink)}
+.incl li::before{content:"✓";position:absolute;right:0;top:0;color:var(--green);font-weight:700}
+
+/* اختيار برنامج آخر */
+.switch{margin:0 0 26px;text-align:center}
+.switch label{display:block;font-size:13px;color:var(--dim);margin-bottom:9px}
+.switch select{
+  background:var(--navy2);color:var(--ink);border:1px solid var(--line);
+  border-radius:12px;padding:12px 15px;font-family:'Tajawal';font-size:15px;
+  width:100%;max-width:430px;cursor:pointer;
+}
+
+/* النموذج */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;
+  padding:26px;backdrop-filter:blur(9px)}
+.card h2{font-size:19px;font-weight:800;margin-bottom:6px}
+.card .sub{color:var(--dim);font-size:14px;margin-bottom:22px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:13.5px;color:var(--gold-lt);font-weight:500}
+label em{font-style:normal;color:#FF8A6B}
+input,select,textarea{
+  background:rgba(13,27,62,.62);border:1px solid var(--line);border-radius:11px;
+  padding:12px 14px;color:var(--ink);font-family:'Tajawal';font-size:15px;width:100%;
+  transition:border-color .16s,box-shadow .16s;
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
+.field.invalid input,.field.invalid select{border-color:#FF6B35}
+.hint{font-size:12px;color:var(--dim)}
+
+/* الدفع */
+.pay{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.pay h3{font-size:16px;color:var(--gold-lt);margin-bottom:6px}
+.pay .sub{margin-bottom:16px}
+.paybox{background:rgba(201,168,76,.07);border:1px dashed var(--line);
+  border-radius:12px;padding:15px 17px;margin-top:14px;font-size:14px;color:var(--dim);display:none}
+.paybox.show{display:block}
+.paybox b{color:var(--gold-lt)}
+.paybox a{color:var(--gold);font-weight:700}
+
+.consent{display:flex;gap:11px;align-items:flex-start;margin-top:20px;
+  background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.consent input{width:19px;height:19px;flex:0 0 auto;margin-top:3px;accent-color:var(--gold)}
+.consent span{font-size:13.5px;color:var(--dim)}
+
+button.go{
+  width:100%;margin-top:22px;padding:16px;border:none;border-radius:13px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
+  color:var(--navy);font-family:'Cairo';font-size:17.5px;font-weight:800;cursor:pointer;
+  transition:transform .14s,box-shadow .14s;
+}
+button.go:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 30px rgba(201,168,76,.3)}
+button.go:disabled{opacity:.6;cursor:not-allowed}
+
+.assure{margin-top:15px;text-align:center;font-size:12.8px;color:var(--dim)}
+
+/* النجاح */
+.done{display:none;text-align:center;padding:52px 26px}
+.done.show{display:block}
+.done .tick{width:70px;height:70px;margin:0 auto 22px;border-radius:50%;
+  background:rgba(76,175,80,.14);border:2px solid var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:33px;color:var(--green)}
+.done h2{font-size:24px;margin-bottom:12px}
+.done p{color:var(--dim);margin-bottom:9px}
+.done .wa{display:inline-block;margin-top:20px;padding:13px 26px;border-radius:12px;
+  background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-family:'Cairo'}
+
+footer{text-align:center;margin-top:34px;color:var(--dim);font-size:12.5px;line-height:2}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:600px){ .grid{grid-template-columns:1fr} .price{text-align:right} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="star"><i></i><i></i></div>
+  <p class="kicker">أكاديمية وَقِفُوهُم</p>
+  <h1 id="pageTitle">التسجيل في البرامج</h1>
+  <p class="tag">سجّلي مقعدك مباشرة — بلا انتظار ردّ ولا محادثة.</p>
+</header>
+
+<div class="prog" id="progCard">
+  <div class="prog-top">
+    <div>
+      <div class="prog-name" id="pName">—</div>
+      <span class="prog-by" id="pBy"></span>
+    </div>
+    <div class="price"><b id="pPrice">—</b><span id="pCur">دينار كويتي</span></div>
+  </div>
+  <div class="meta-row" id="pMeta"></div>
+  <ul class="incl" id="pIncl"></ul>
+</div>
+
+<div class="switch">
+  <label for="progPick">أو اختر برنامجاً آخر</label>
+  <select id="progPick"></select>
+</div>
+
+<div class="card" id="formWrap">
+  <h2>بيانات المسجِّل</h2>
+  <p class="sub">دقيقة واحدة. تصلك رسالة تأكيد على واتساب فور اكتمال التسجيل.</p>
+
+  <form id="regForm" novalidate>
+    <div class="grid">
+      <div class="field full">
+        <label for="name">الاسم الكامل <em>*</em></label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="الاسم كما تريده في الشهادة">
+      </div>
+      <div class="field">
+        <label for="phone">الجوال (واتساب) <em>*</em></label>
+        <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="965XXXXXXXX">
+        <span class="hint">مع رمز الدولة بلا + ولا مسافات</span>
+      </div>
+      <div class="field">
+        <label for="email">البريد الإلكتروني <em>*</em></label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com">
+      </div>
+      <div class="field">
+        <label for="location">الدولة / المدينة</label>
+        <input id="location" name="location" type="text" placeholder="الكويت — حولي">
+      </div>
+      <div class="field">
+        <label for="category">صفتك <em>*</em></label>
+        <select id="category" name="category">
+          <option value="" disabled selected>اختر</option>
+          <option>معلّم/ة قرآن وعلوم شرعية</option>
+          <option>مدير/ة مركز قرآني أو إسلامي</option>
+          <option>طالب/ة علم شرعي</option>
+          <option>باحث/ة في الدراسات الإسلامية</option>
+          <option>داعية</option>
+          <option>مهتم/ة بالتقنية والعلوم الشرعية</option>
+          <option>جهة / كيان شرعي</option>
+          <option>أخرى</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="pay">
+      <h3>الدفع</h3>
+      <p class="sub">اختر الطريقة الأنسب لك — ويُثبَّت مقعدك فور التحقّق.</p>
+      <div class="field full">
+        <label for="paymentMethod">طريقة الدفع <em>*</em></label>
+        <select id="paymentMethod" name="paymentMethod">
+          <option value="" disabled selected>اختر طريقة الدفع</option>
+          <option value="رابط الدفع الإلكتروني">رابط دفع إلكتروني (K-NET / بطاقة)</option>
+          <option value="تحويل بنكي">تحويل بنكي</option>
+          <option value="جهة / فاتورة">جهة أو مؤسسة — أحتاج فاتورة</option>
+        </select>
+      </div>
+
+      <div class="paybox" id="boxLink">
+        اضغط على <a id="payLink" href="#" target="_blank" rel="noopener">رابط الدفع الآمن</a>
+        ثم أكمل التسجيل أدناه. يصلك الإيصال على بريدك مباشرة.
+      </div>
+      <div class="paybox" id="boxBank">
+        حوّل المبلغ إلى حساب الأكاديمية، ثم اكتب رقم العملية في الخانة أدناه:<br>
+        <b id="bankInfo">⚠️ ضعي بيانات الحساب في إعداد BANK أعلى الملف</b>
+      </div>
+      <div class="paybox" id="boxOrg">
+        سنرسل لك عرض سعر وفاتورة رسمية باسم الجهة خلال يوم عمل واحد.
+        اكتب اسم الجهة والرقم الضريبي (إن وُجد) في خانة الملاحظات.
+      </div>
+
+      <div class="field full" id="refField" style="margin-top:14px;display:none">
+        <label for="transferRef">رقم العملية / اسم الجهة</label>
+        <input id="transferRef" name="transferRef" type="text" placeholder="رقم التحويل أو اسم الجهة">
+      </div>
+    </div>
+
+    <div class="consent">
+      <input id="consent" name="consent" type="checkbox">
+      <span>أوافق على استلام رسائل الأكاديمية المتعلقة بالبرنامج عبر واتساب والبريد.</span>
+    </div>
+
+    <button class="go" id="submitBtn" type="submit">تثبيت المقعد</button>
+    <p class="assure">مقاعد محدودة · تسجيلك محفوظ فور الإرسال · بياناتك لا تُشارَك مع أي جهة</p>
+  </form>
+</div>
+
+<div class="done" id="success">
+  <div class="tick">✓</div>
+  <h2>تم تثبيت مقعدك</h2>
+  <p>وصلنا تسجيلك في <b id="doneProg">البرنامج</b>.</p>
+  <p id="doneNote">سنتواصل معك على واتساب خلال ٢٤ ساعة بتفاصيل الانضمام.</p>
+  <a class="wa" id="waLink" href="#" target="_blank" rel="noopener">تواصل معنا على واتساب</a>
+</div>
+
+<footer>
+  أكاديمية وَقِفُوهُم — وعيٌّ يُلهِم التعلُّم، وتقنيةٌ تُمكِّن التعليم<br>
+  <a href="https://waqifuhum.com">waqifuhum.com</a> · <span>@waqifuhum.academy</span>
+</footer>
+</div>
+
+<script>
+/* ═════════ الإعداد — كل ما تحتاجين تعديله موجود هنا ═════════ */
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4KUXcVwBuIqaEmNdNhXPFJYTqSDAmIA9ElAgoSDIXxV5AJncgh4WQzUFPeVEwIc6A/exec";
+
+/* ⚠️ ضعي معرّف بكسل Meta (نفس المعرّف المستعمل في صفحة الورش) */
+const PIXEL_ID = "1349334376056982";  // مأخوذ من البكسل المركّب على waqifuhum.com
+
+const WHATSAPP = "96597845119";
+const CURRENCY = "KWD";
+
+/* ⚠️ بيانات التحويل البنكي — تظهر لمن يختار «تحويل بنكي» */
+const BANK = "اسم البنك — رقم الحساب / IBAN — باسم: أكاديمية وَقِفُوهُم";
+
+/* الأسعار مأخوذة من صفحة waqifuhum.com/our-products المنشورة — ١١ أغسطس ٢٠٢٦.
+   payLink = رابط دفع Payzah خاص بكل برنامج. الفارغ منها يحتاج رابطاً من لوحة Payzah
+   (رابط واحد عام موجود، والمطلوب رابط لكل منتج ليصحّ الإسناد والمبلغ). */
+const PROGRAMS = {
+  // ✅ = رابط دفع بيزه متحقَّق منه ويعمل   ⛔ = ناقص، يحتاج إنشاءه في تطبيق بيزه
+  masnad_w: {
+    name: "برنامج مُسند: حفظ القرآن بالسند المتصل (للنساء)",
+    by: "الشيخة فاطمة محمد الأمين",
+    price: 45, was: null,
+    payLink: "https://weblink.payzah.com/?id=waqifuhum_academy_5",                       // ✅ رابط مسند — يخدم الرجال والنساء
+    meta: ["سند متصل", "للنساء", "مقاعد محدودة"],
+    includes: ["حفظ بسند متصل مع متابعة فردية", "جلسات تسميع منتظمة", "إجازة عند الإتمام"]
+  },
+  masnad_m: {
+    name: "برنامج مُسند: حفظ القرآن بالسند المتصل (للرجال)",
+    by: "الشيخ د. محمد الحجي",
+    price: 45, was: null,
+    payLink: "https://weblink.payzah.com/?id=waqifuhum_academy_5",                       // ✅ نفس الرابط
+    meta: ["سند متصل", "للرجال", "مقاعد محدودة"],
+    includes: ["حفظ بسند متصل مع متابعة فردية", "جلسات تسميع منتظمة", "إجازة عند الإتمام"]
+  },
+  kayanat: {
+    name: "البرنامج الشامل لتوظيف الذكاء الاصطناعي في الكيانات الشرعية",
+    by: "أ. عبدالله العمري",
+    price: 85, was: null,
+    payLink: "https://weblink.payzah.com/?id=waqifuhum_academy_7",                       // ✅ فيه خياران: ٨٥ و١٣٥
+    meta: ["للمؤسسات والأفراد", "معسكر", "شهادة"],
+    includes: ["توظيف الذكاء الاصطناعي في تشغيل الكيان الشرعي", "نماذج ووثائق تشغيلية جاهزة", "متابعة بعد البرنامج"]
+  },
+  wakeel: {
+    name: "الوكيل المتخصص: الذكاء الاصطناعي في خدمة الفقه والدعوة",
+    by: "أ. جاسم الصلال",
+    price: 25, was: null,
+    payLink: "https://weblink.payzah.com/?id=waqifuhum_academy_1",                       // ✅ ⚠️ بيزه ٢٥ والموقع ٢٠ — وحّدي السعر
+    meta: ["تطبيقي", "متقدّم", "شهادة"],
+    includes: ["بناء وكيل ذكاء اصطناعي متخصص في مجالك", "ضوابط شرعية للتحقّق من المخرجات", "نماذج أوامر جاهزة"]
+  },
+  mubtakir: {
+    name: "المعلم المبتكر: صمّم أدواتك التفاعلية",
+    by: "أ. مالك دواس",
+    price: 17, was: null,
+    payLink: "https://weblink.payzah.com/?id=waqifuhum_academy_3",                       // ✅
+    meta: ["تطبيق عملي", "قوالب جاهزة", "تسجيلات دائمة"],
+    includes: ["بناء أدواتك التفاعلية خطوة بخطوة", "قوالب جاهزة تُستعمل في حلقتك فوراً", "تسجيلات الدورة تبقى معك"]
+  },
+  consult: {
+    name: "استشارة فردية ١:١ مع د. هيفاء العيدان",
+    by: "د. هيفاء العيدان",
+    price: 35, was: null,
+    payLink: "https://weblink.payzah.com/?id=waqifuhum_academy_4",                       // ✅
+    meta: ["فردية ١:١", "تقرير مكتوب", "متابعة"],
+    includes: ["تشخيص وضعك الحالي بالأرقام", "توصيات مرتّبة بالأولوية", "تقرير مكتوب بعد الجلسة"]
+  },
+  mowalled: {
+    name: "مولّد قوالب كلود للعلوم الشرعية",
+    by: "د. هيفاء العيدان",
+    price: 15, was: null,
+    payLink: "https://weblink.payzah.com/?id=waqifuhum_academy_6",                       // ✅
+    meta: ["منتج رقمي", "تسليم فوري"],
+    includes: ["مولّد قوالب جاهز", "أمثلة تطبيقية", "تحديثات مجانية"]
+  },
+  uxmc: {
+    name: "معسكر رقمي UXMC — من الفكرة إلى المنتج القرآني أو الشرعي",
+    by: "أ. زياد الرويشد",
+    price: 85, was: null,
+    payLink: "",                                       // ⛔ ناقص — أنشئيه في بيزه وضعي معرّفه هنا
+    meta: ["معسكر مكثّف", "مشروع حقيقي", "إرشاد مباشر"],
+    includes: ["تصميم منتج قرآني من الفكرة إلى النموذج", "إرشاد مباشر على مشروعك", "عرض مشروعك في اليوم الختامي"]
+  },
+  khatma: {
+    name: "قالب رحلة ختمة القرآن الذكية",
+    by: "د. هيفاء العيدان",
+    price: 35, was: null,
+    payLink: "",                                       // ⛔ ناقص
+    meta: ["منتج رقمي", "تسليم فوري"],
+    includes: ["قالب جاهز للاستعمال المباشر", "دليل استخدام مصوّر", "تحديثات مجانية"]
+  }
+};
+
+/* ═════════ من هنا فصاعداً لا حاجة للتعديل ═════════ */
+
+/* بكسل Meta */
+(function(){
+  if(!PIXEL_ID){ console.warn('وَقِفُوهُم: PIXEL_ID فارغ — القياس معطّل.'); return; }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', PIXEL_ID); fbq('track','PageView');
+})();
+
+/* الإسناد التلقائي */
+const ATTR = (function(){
+  const q = new URLSearchParams(location.search);
+  const keys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'];
+  let fresh = {};
+  keys.forEach(k => { const v = q.get(k); if(v) fresh[k] = v; });
+  if(fresh.fbclid && !fresh.utm_source) fresh.utm_source = 'facebook_ads';
+  if(Object.keys(fresh).length){
+    fresh.referrer = document.referrer || '';
+    try{ localStorage.setItem('wq_attr', JSON.stringify(fresh)); }catch(e){}
+    return fresh;
+  }
+  try{ const s = JSON.parse(localStorage.getItem('wq_attr')||'null'); if(s) return s; }catch(e){}
+  return { utm_source: document.referrer ? 'إحالة' : 'مباشر', referrer: document.referrer || '' };
+})();
+
+/* اختيار البرنامج من الرابط ?p=masnad */
+const keys = Object.keys(PROGRAMS);
+let current = new URLSearchParams(location.search).get('p');
+if(!PROGRAMS[current]) current = keys[0];
+
+const pick = document.getElementById('progPick');
+pick.innerHTML = keys.map(k =>
+  `<option value="${k}">${PROGRAMS[k].name}</option>`).join('');
+
+function money(v){
+  return v > 0 ? Number(v).toLocaleString('ar-EG',{minimumFractionDigits:0}) : '—';
+}
+
+function renderProgram(key){
+  const p = PROGRAMS[key]; current = key; pick.value = key;
+  document.title = p.name + ' — أكاديمية وَقِفُوهُم';
+  document.getElementById('pageTitle').textContent = p.name;
+  document.getElementById('pName').textContent = p.name;
+  document.getElementById('pBy').textContent = p.by ? 'مع ' + p.by : '';
+  document.getElementById('pPrice').innerHTML =
+    money(p.price) + (p.was ? ` <s>${money(p.was)}</s>` : '');
+  document.getElementById('pCur').textContent = p.price > 0 ? 'دينار كويتي' : 'السعر يُعلَن قريباً';
+  document.getElementById('pMeta').innerHTML =
+    (p.meta||[]).map(m=>`<span class="pill">${m}</span>`).join('');
+  document.getElementById('pIncl').innerHTML =
+    (p.includes||[]).map(i=>`<li>${i}</li>`).join('');
+
+  const opt = document.querySelector('#paymentMethod option[value="رابط الدفع الإلكتروني"]');
+  if(opt) opt.hidden = !p.payLink;
+  const a = document.getElementById('payLink');
+  a.href = p.payLink || '#';
+
+  const url = new URL(location); url.searchParams.set('p', key);
+  history.replaceState({}, '', url);
+
+  if(typeof fbq === 'function'){
+    fbq('track','ViewContent',{ content_name:p.name, value:p.price||0, currency:CURRENCY });
+  }
+}
+pick.addEventListener('change', e => renderProgram(e.target.value));
+renderProgram(current);
+
+/* صناديق الدفع */
+const payMethod = document.getElementById('paymentMethod');
+payMethod.addEventListener('change', () => {
+  const v = payMethod.value;
+  document.getElementById('boxLink').classList.toggle('show', v === 'رابط الدفع الإلكتروني');
+  document.getElementById('boxBank').classList.toggle('show', v === 'تحويل بنكي');
+  document.getElementById('boxOrg').classList.toggle('show', v === 'جهة / فاتورة');
+  document.getElementById('refField').style.display =
+    (v === 'تحويل بنكي' || v === 'جهة / فاتورة') ? 'flex' : 'none';
+  if(typeof fbq === 'function'){
+    const p = PROGRAMS[current];
+    fbq('track','InitiateCheckout',{ content_name:p.name, value:p.price||0, currency:CURRENCY });
+  }
+});
+// إخفاء التحويل البنكي ما لم تُملأ بيانات الحساب فعلاً
+const BANK_READY = BANK && !/اسم البنك|IBAN —|رقم الحساب \//.test(BANK);
+document.getElementById('bankInfo').textContent = BANK_READY ? BANK : '';
+if (!BANK_READY) {
+  const o = document.querySelector('#paymentMethod option[value="تحويل بنكي"]');
+  if (o) o.remove();
+}
+document.getElementById('waLink').href = 'https://wa.me/' + WHATSAPP;
+
+/* الإرسال */
+const form = document.getElementById('regForm');
+const btn  = document.getElementById('submitBtn');
+const bad  = (el,is) => el.closest('.field').classList.toggle('invalid', is);
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = form; let ok = true;
+
+  ['name','phone','email','category','paymentMethod'].forEach(n => {
+    const el = f[n]; const isBad = !el.value.trim(); bad(el,isBad); if(isBad) ok = false;
+  });
+  const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim());
+  bad(f.email, !emailOk); if(!emailOk) ok = false;
+  const phoneOk = /^[0-9+\s]{8,}$/.test(f.phone.value.trim());
+  bad(f.phone, !phoneOk); if(!phoneOk) ok = false;
+  if(!f.consent.checked){ f.consent.style.outline = '2px solid #FF6B35'; ok = false; }
+  else f.consent.style.outline = 'none';
+  if(!ok) return;
+
+  const p = PROGRAMS[current];
+  const d = new URLSearchParams();
+  d.append('name', f.name.value.trim());
+  d.append('phone', f.phone.value.trim());
+  d.append('email', f.email.value.trim());
+  d.append('location', f.location.value.trim());
+  d.append('age',''); d.append('gender','');
+  d.append('category', f.category.value);
+  d.append('program', p.name);
+  d.append('regType', 'دورة مدفوعة');
+  d.append('paymentMethod', f.paymentMethod.value);
+  d.append('transferRef', f.transferRef.value.trim());
+  d.append('source', ATTR.utm_source || '');
+  d.append('consent', 'نعم');
+  d.append('utm_source', ATTR.utm_source || '');
+  d.append('utm_medium', ATTR.utm_medium || '');
+  d.append('utm_campaign', ATTR.utm_campaign || '');
+  d.append('utm_content', ATTR.utm_content || '');
+  d.append('referrer', ATTR.referrer || '');
+
+  btn.disabled = true; btn.textContent = 'جاري التثبيت…';
+  try{
+    await fetch(SCRIPT_URL, { method:'POST', body:d, mode:'no-cors' });
+    if(typeof fbq === 'function'){
+      fbq('track','Purchase', { content_name:p.name, value:p.price||0, currency:CURRENCY });
+      fbq('track','Lead',     { content_name:p.name, content_category:'دورة مدفوعة' });
+    }
+    document.getElementById('doneProg').textContent = p.name;
+    // بياناته وصلت وسُجّل الحدث — الآن ننقله إلى الدفع بلا أن يبحث عن زرّ
+    if (p.payLink && f.paymentMethod.value === 'رابط الدفع الإلكتروني') {
+      const d = document.getElementById('doneNote');
+      if (d) d.textContent = 'ننقلك الآن إلى صفحة الدفع الآمنة…';
+      setTimeout(() => { window.location.href = p.payLink; }, 1800);
+    }
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('progCard').style.display = 'none';
+    document.querySelector('.switch').style.display = 'none';
+    document.getElementById('success').classList.add('show');
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }catch(err){
+    btn.disabled = false; btn.textContent = 'تثبيت المقعد';
+    alert('تعذّر الإرسال. تأكد من الاتصال أو حاول مجدداً.');
+  }
+});
+</script>
+</body>
+</html>

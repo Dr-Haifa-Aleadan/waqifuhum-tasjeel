@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>التسجيل — أكاديمية وَقِفُوهُم</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D1B3E;--gold:#C9A84C;--gold-lt:#E8C97A;--ink:#F2F4F8;--dim:#A9B2C7;--line:rgba(201,168,76,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1000px 600px at 80% -10%,#1E2C56,transparent 60%),var(--navy);
+  color:var(--ink);font-family:'Tajawal',system-ui,sans-serif;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;padding:36px 18px;line-height:1.8}
+.wrap{max-width:620px;width:100%;text-align:center}
+.star{width:48px;height:48px;margin:0 auto 20px;position:relative}
+.star i{position:absolute;inset:0;border:1.6px solid var(--gold);border-radius:6px}
+.star i:last-child{transform:rotate(45deg)}
+.name{font-family:'Cairo';font-size:34px;font-weight:800;
+  background:linear-gradient(135deg,#E8C97A,#C9A84C 60%,#E8C97A);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.tag{color:var(--dim);font-size:14.5px;margin:6px 0 34px}
+.cards{display:grid;gap:14px}
+a.card{display:block;background:rgba(255,255,255,.045);border:1px solid var(--line);
+  border-radius:16px;padding:24px 26px;text-decoration:none;color:inherit;text-align:right;
+  transition:.18s}
+a.card:hover{transform:translateY(-3px);border-color:var(--gold);
+  box-shadow:0 14px 36px rgba(0,0,0,.35)}
+a.card b{display:block;font-family:'Cairo';font-size:19px;font-weight:800;color:var(--gold-lt);margin-bottom:6px}
+a.card span{display:block;font-size:14px;color:var(--dim)}
+footer{margin-top:32px;font-size:12.5px;color:var(--dim)}
+footer a{color:var(--gold);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="star"><i></i><i></i></div>
+  <div class="name">وَقِفُوهُم</div>
+  <p class="tag">وعيٌّ يُلهِم التعلُّم، وتقنيةٌ تُمكِّن التعليم</p>
+
+  <div class="cards">
+    <a class="card" href="baramij/">
+      <b>التسجيل في البرامج والدورات</b>
+      <span>مسند · الكيانات الشرعية · المعلم المبتكر · الوكيل المتخصص · الاستشارات — الدفع مباشرة بـ K-NET أو البطاقة</span>
+    </a>
+    <a class="card" href="warsha/">
+      <b>التسجيل في الورش المجانية</b>
+      <span>الورش المفتوحة للمعلمين والمحفّظين والباحثين</span>
+    </a>
+  </div>
+
+  <footer>
+    أكاديمية وَقِفُوهُم — الكويت · <a href="https://waqifuhum.com">waqifuhum.com</a>
+  </footer>
+</div>
+</body>
+</html>
