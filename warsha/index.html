@@ -16,7 +16,7 @@
 
 :root{
   --navy-deep:#0D1B3E; --navy-rich:#1A2540; --navy-mid:#1E3A5F; --navy-light:#243B6A;
-  --gold:#C9A84C; --gold-light:#E8C97A; --gold-pale:#F5E6B8;
+  --gold:#5b8fe0; --gold-light:#8db8f2; --gold-pale:#dbe8ff;
   --green:#4CAF50; --purple:#7C3AED; --cyan:#26C6DA; --orange:#FF6B35;
   --txt:rgba(255,255,255,0.88); --txt-soft:rgba(255,255,255,0.55);
 }
@@ -35,7 +35,7 @@ body{
 /* زخرفة نجمة إسلامية ثمانية خفيفة */
 body::before{
   content:""; position:fixed; inset:0; z-index:0; opacity:0.05; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C9A84C' stroke-width='1'%3E%3Cpath d='M60 10 L74 46 L110 60 L74 74 L60 110 L46 74 L10 60 L46 46 Z'/%3E%3Cpath d='M60 22 L70 50 L98 60 L70 70 L60 98 L50 70 L22 60 L50 50 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238db8f2' stroke-width='1'%3E%3Cpath d='M60 10 L74 46 L110 60 L74 74 L60 110 L46 74 L10 60 L46 46 Z'/%3E%3Cpath d='M60 22 L70 50 L98 60 L70 70 L60 98 L50 70 L22 60 L50 50 Z'/%3E%3C/g%3E%3C/svg%3E");
   background-size:120px 120px;
 }
 
@@ -46,9 +46,9 @@ body::before{
 .brand{text-align:center;margin-bottom:24px}
 .wordmark{
   font-family:'Cairo',sans-serif;font-weight:800;font-size:40px;letter-spacing:.04em;
-  background:linear-gradient(135deg,#E8C97A,#C9A84C 60%,#E8C97A);
+  background:linear-gradient(180deg,#ffffff 15%,#8db8f2);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  text-shadow:0 2px 30px rgba(201,168,76,.25); line-height:1.2;
+  text-shadow:0 2px 30px rgba(59,114,212,.25); line-height:1.2;
 }
 .dots{display:flex;gap:7px;justify-content:center;margin:8px 0 4px}
 .dots span{width:7px;height:7px;border-radius:50%;background:var(--gold);opacity:.9}
@@ -79,22 +79,22 @@ input,select,textarea{
 }
 input::placeholder,textarea::placeholder{color:rgba(255,255,255,.35)}
 input:focus,select:focus,textarea:focus{
-  border-color:var(--gold);background:rgba(201,168,76,0.07);
-  box-shadow:0 0 0 3px rgba(201,168,76,.14),0 0 22px rgba(201,168,76,.12);
+  border-color:var(--gold);background:rgba(59,114,212,0.07);
+  box-shadow:0 0 0 3px rgba(59,114,212,.14),0 0 22px rgba(59,114,212,.12);
 }
 select{appearance:none;cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238db8f2' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:left 16px center;padding-inline-start:14px;padding-inline-end:38px;}
 select option{background:#1A2540;color:#fff}
 
 /* قسم الدفع — يظهر فقط للدورات المدفوعة */
 #paySection{
   display:none;margin-top:4px;padding:16px;border-radius:14px;
-  background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.22);
-  box-shadow:inset 0 1px 0 rgba(201,168,76,.1);
+  background:rgba(59,114,212,0.07);border:1px solid rgba(59,114,212,0.22);
+  box-shadow:inset 0 1px 0 rgba(59,114,212,.1);
 }
 #paySection.show{display:block;animation:rise .35s ease both}
-.pay-badge{display:inline-block;background:linear-gradient(135deg,#C9A84C,#E8C97A);color:var(--navy-deep);
+.pay-badge{display:inline-block;background:linear-gradient(135deg,#2556b5,#3b72d4);color:#fff;
   font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:12px}
 
 /* الموافقة */
@@ -103,12 +103,12 @@ select option{background:#1A2540;color:#fff}
 
 /* الزر */
 .btn{
-  width:100%;font-family:'Cairo',sans-serif;font-weight:700;font-size:15.5px;color:var(--navy-deep);
-  background:linear-gradient(135deg,#C9A84C 0%,#E8C97A 50%,#C9A84C 100%);
+  width:100%;font-family:'Cairo',sans-serif;font-weight:700;font-size:15.5px;color:#fff;
+  background:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%);
   border:none;border-radius:50px;padding:15px;cursor:pointer;transition:.25s;
-  box-shadow:0 6px 24px rgba(201,168,76,.4);
+  box-shadow:0 6px 24px rgba(59,114,212,.4);
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.55)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(59,114,212,.55)}
 .btn:active{transform:translateY(0)}
 .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 
@@ -136,6 +136,7 @@ select option{background:#1A2540;color:#fff}
   display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;direction:ltr}
 .footer .sep{width:1px;height:12px;background:rgba(255,255,255,.18)}
 .note{margin-top:14px;text-align:center;font-size:11px;color:rgba(255,255,255,.3)}
+html{background:#0D1B3E}
 </style>
 </head>
 <body>

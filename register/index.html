@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>التسجيل — أكاديمية وَقِفُوهُم</title>
+<meta name="theme-color" content="#0a1631" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* صفحة التسجيل في برامج أكاديمية وَقِفُوهُم — بهوية الموقع الموحّدة (أكتوبر ٢٠٢٦):
+   كحلي عميق، زجاج أزرق ملكي، نيون أزرق خفيف، وماسة حمراء للتوهّج فقط. */
+:root{
+  --bg:#0a1631; --bg2:#0f2147; --card:rgba(255,255,255,.045);
+  --line:rgba(141,184,242,.22); --line2:rgba(141,184,242,.45);
+  --blue:#3b72d4; --blue2:#2556b5; --blue3:#1b438f; --ice:#8db8f2; --ice2:#dbe8ff;
+  --red:#d6404a;
+  --txt:rgba(255,255,255,.9); --soft:rgba(220,232,255,.62);
+  --P:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:#0a1631}
+body{
+  font-family:'Tajawal',system-ui,sans-serif;color:var(--txt);min-height:100vh;line-height:1.8;
+  background:
+    radial-gradient(900px 560px at 85% -10%,rgba(59,114,212,.28),transparent 60%),
+    radial-gradient(700px 520px at 5% 110%,rgba(79,140,255,.14),transparent 62%),
+    linear-gradient(180deg,var(--bg2),var(--bg) 60%);
+  padding:40px 16px 60px;-webkit-font-smoothing:antialiased;
+}
+.shell{max-width:640px;margin:0 auto}
+
+/* العلامة */
+.brand{text-align:center;margin-bottom:26px}
+.logo{width:64px;height:auto;display:block;margin:0 auto 10px;filter:brightness(0) invert(1) drop-shadow(0 0 14px rgba(79,140,255,.75))}
+.wordmark{font-family:'Amiri',serif;font-weight:700;font-size:44px;line-height:1.3;
+  background:linear-gradient(180deg,#ffffff 20%,#8db8f2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 18px rgba(79,140,255,.35))}
+.dots{display:flex;justify-content:center;align-items:center;gap:9px;margin:6px 0 8px}
+.dots span{width:6px;height:6px;border-radius:50%;background:var(--ice);opacity:.75}
+.dots span:nth-child(2){width:9px;height:9px;border-radius:2px;transform:rotate(45deg);background:var(--red);opacity:1;box-shadow:0 0 10px rgba(214,64,74,.8)}
+.tagline{color:var(--soft);font-size:15px}
+
+/* البطاقة */
+.card{
+  background:linear-gradient(160deg,rgba(59,114,212,.10),var(--card));
+  border:1px solid var(--line);border-radius:22px;padding:30px 26px 28px;
+  box-shadow:0 24px 60px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.06);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.card-head{text-align:center;margin-bottom:24px}
+.card-head h1{font-family:'Amiri',serif;font-size:clamp(26px,6vw,34px);font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px}
+.card-head h1 b{color:var(--ice);font-weight:700}
+.card-head p{color:var(--soft);font-size:15px;max-width:48ch;margin:0 auto}
+
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:14.5px;font-weight:700;color:#fff;margin-bottom:7px}
+.req{color:var(--red);margin-right:3px}
+input[type=text],input[type=tel],input[type=email],select{
+  width:100%;font-family:inherit;font-size:15.5px;color:#fff;
+  background:rgba(10,22,49,.55);border:1px solid var(--line);border-radius:13px;
+  padding:13px 15px;outline:none;transition:border-color .18s,box-shadow .18s,background .18s;
+  -webkit-appearance:none;appearance:none;
+}
+input::placeholder{color:rgba(220,232,255,.38)}
+select{cursor:pointer;padding-left:38px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238db8f2' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 14px center}
+select option{background:#0f2147;color:#fff}
+input:focus,select:focus{border-color:var(--ice);background:rgba(15,33,71,.75);box-shadow:0 0 0 3px rgba(59,114,212,.28)}
+.err{display:none;color:#ff9aa0;font-size:12.5px;margin-top:6px}
+.field.invalid input,.field.invalid select{border-color:rgba(214,64,74,.75);box-shadow:0 0 0 3px rgba(214,64,74,.16)}
+.field.invalid .err{display:block}
+
+/* قسم الدفع */
+#paySection{display:none;background:rgba(59,114,212,.08);border:1px dashed var(--line2);border-radius:16px;padding:18px 16px 16px;margin-bottom:16px}
+#paySection.show{display:block}
+.pay-badge{display:inline-block;font-size:12.5px;font-weight:700;color:var(--ice2);background:rgba(59,114,212,.22);border:1px solid var(--line2);border-radius:999px;padding:3px 13px;margin-bottom:12px}
+
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--soft);margin:6px 0 22px;line-height:1.7}
+.consent input{width:19px;height:19px;flex:0 0 19px;margin-top:3px;accent-color:var(--blue);border-radius:5px}
+
+.btn{
+  width:100%;font-family:inherit;font-size:17px;font-weight:800;color:#fff;cursor:pointer;
+  border:0;border-radius:999px;padding:15px 20px;background:var(--P);
+  box-shadow:0 12px 30px rgba(37,86,181,.45),inset 0 1px 0 rgba(255,255,255,.28);
+  transition:transform .18s,box-shadow .18s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,86,181,.5),0 0 0 1px rgba(214,64,74,.55),0 0 22px rgba(214,64,74,.28),inset 0 1px 0 rgba(255,255,255,.28)}
+.btn:disabled{opacity:.7;cursor:wait;transform:none}
+
+/* النجاح */
+#success{display:none;text-align:center;padding:10px 4px}
+#success.show{display:block}
+.check{width:74px;height:74px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(59,114,212,.16);border:1px solid var(--line2);box-shadow:0 0 30px rgba(79,140,255,.35)}
+.check svg{width:38px;height:38px}
+#success h2{font-family:'Amiri',serif;font-size:30px;color:#fff;margin-bottom:8px}
+#success h2 b{color:var(--ice)}
+#success p{color:var(--soft);font-size:15.5px;margin-bottom:22px}
+.wa-btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#fff;font-weight:700;font-size:15.5px;
+  background:var(--P);border-radius:999px;padding:12px 24px;box-shadow:0 10px 26px rgba(37,86,181,.45)}
+
+/* التذييل */
+.footer{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin-top:26px;font-size:13.5px;color:var(--soft);direction:ltr}
+.footer .sep{width:5px;height:5px;transform:rotate(45deg);background:var(--red);opacity:.85}
+.note{text-align:center;color:rgba(220,232,255,.45);font-size:12.5px;margin-top:10px}
+.back{display:block;text-align:center;margin-top:14px;font-size:13.5px;color:var(--ice);text-decoration:none}
+
+@media (max-width:560px){
+  body{padding:28px 14px 48px}
+  .row{grid-template-columns:1fr;gap:0}
+  .card{padding:24px 18px 22px;border-radius:20px}
+  .wordmark{font-size:38px}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <div class="brand">
+    <img class="logo" src="https://assets.cdn.filesafe.space/gAeAVJru7tUQGvAFE972/media/69ce29a18e248769f7eb28e3.png" alt="شعار أكاديمية وَقِفُوهُم">
+    <div class="wordmark">وَقِفُوهُم</div>
+    <div class="dots"><span></span><span></span><span></span></div>
+    <div class="tagline">وعيٌّ شرعيٌّ في عصرٍ تقني</div>
+  </div>
+
+  <div class="card">
+    <div id="formWrap">
+      <div class="card-head">
+        <h1>التسجيل في <b>برامج الأكاديمية</b></h1>
+        <p>سجّل بياناتك مرة واحدة للانضمام إلى ورشنا المجانية ودوراتنا المدفوعة. بياناتك محفوظة بأمان لدى الأكاديمية.</p>
+      </div>
+
+      <form id="regForm" novalidate>
+        <div class="row">
+          <div class="field">
+            <label>الاسم الكامل<span class="req">*</span></label>
+            <input name="name" type="text" placeholder="الاسم الثلاثي" />
+            <div class="err">يرجى إدخال الاسم</div>
+          </div>
+          <div class="field">
+            <label>رقم الجوال (واتساب)<span class="req">*</span></label>
+            <input name="phone" type="tel" inputmode="tel" placeholder="مع رمز الدولة، مثال: 96597845119" dir="ltr" style="text-align:right" />
+            <div class="err">يرجى إدخال رقم صحيح</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>البريد الإلكتروني<span class="req">*</span></label>
+            <input name="email" type="email" placeholder="name@example.com" dir="ltr" style="text-align:right" />
+            <div class="err">يرجى إدخال بريد صحيح</div>
+          </div>
+          <div class="field">
+            <label>الدولة / المدينة</label>
+            <input name="location" type="text" placeholder="الكويت — مدينة الكويت" />
+            <div class="err"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>العمر<span class="req">*</span></label>
+            <select name="age">
+              <option value="" disabled selected>اختر الفئة العمرية</option>
+              <option>أقل من 18</option>
+              <option>18 – 25</option>
+              <option>26 – 35</option>
+              <option>36 – 45</option>
+              <option>46 – 60</option>
+              <option>أكثر من 60</option>
+            </select>
+            <div class="err">يرجى اختيار الفئة العمرية</div>
+          </div>
+          <div class="field">
+            <label>الجنس<span class="req">*</span></label>
+            <select name="gender">
+              <option value="" disabled selected>اختر</option>
+              <option>ذكر</option>
+              <option>أنثى</option>
+            </select>
+            <div class="err">يرجى اختيار الجنس</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>الفئة التي تنتمي إليها<span class="req">*</span></label>
+          <select name="category">
+            <option value="" disabled selected>اختر الفئة</option>
+            <option>معلّم/ة قرآن وعلوم شرعية</option>
+            <option>طالب/ة علم شرعي</option>
+            <option>داعية</option>
+            <option>باحث/ة في الدراسات الإسلامية</option>
+            <option>مدير/ة مركز قرآني أو إسلامي</option>
+            <option>مهتم/ة بالتقنية والعلوم الشرعية</option>
+            <option>أخرى</option>
+          </select>
+          <div class="err">يرجى اختيار الفئة</div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>البرنامج المراد التسجيل فيه<span class="req">*</span></label>
+            <input name="program" id="program" type="text" list="programsList" placeholder="اكتب اسم الورشة أو الدورة" />
+            <datalist id="programsList"></datalist>
+            <div class="err">يرجى كتابة اسم البرنامج</div>
+          </div>
+          <div class="field">
+            <label>نوع التسجيل<span class="req">*</span></label>
+            <select name="regType" id="regType">
+              <option value="" disabled selected>اختر النوع</option>
+              <option value="ورشة مجانية">ورشة مجانية</option>
+              <option value="دورة مدفوعة">دورة مدفوعة</option>
+            </select>
+            <div class="err">يرجى اختيار النوع</div>
+          </div>
+        </div>
+
+        <!-- قسم الدفع -->
+        <div id="paySection">
+          <span class="pay-badge">بيانات الدفع</span>
+          <div class="field">
+            <label>طريقة الدفع</label>
+            <select name="paymentMethod">
+              <option value="" disabled selected>اختر طريقة الدفع</option>
+              <option>تحويل بنكي</option>
+              <option>K-NET / بطاقة</option>
+              <option>محفظة إلكترونية</option>
+              <option>أخرى</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>رقم عملية التحويل / المرجع</label>
+            <input name="transferRef" type="text" placeholder="رقم العملية — مع إرسال صورة الإيصال على واتساب الأكاديمية" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>كيف عرفت عنّا؟</label>
+          <select name="source">
+            <option value="" disabled selected>اختر المصدر</option>
+            <option>إنستغرام</option>
+            <option>واتساب / مجموعة</option>
+            <option>توصية صديق/ة</option>
+            <option>تويتر (X)</option>
+            <option>محرك بحث</option>
+            <option>أخرى</option>
+          </select>
+          <div class="err"></div>
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" name="consent" id="consent" />
+          <label for="consent" style="margin:0;font-weight:400">أوافق على استلام رسائل الأكاديمية عبر واتساب والبريد الإلكتروني بخصوص الورش والدورات.</label>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">تأكيد التسجيل</button>
+      </form>
+    </div>
+
+    <!-- النجاح -->
+    <div id="success">
+      <div class="check">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#8db8f2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>تم التسجيل <b>بنجاح</b></h2>
+      <p>وصلنا طلبك وسنتواصل معك قريباً بتفاصيل الانضمام.<br>بارك الله فيك ونفع بك.</p>
+      <a class="wa-btn" href="https://wa.me/96597845119" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.8-.1 1.5z"/></svg>
+        تواصل مع الأكاديمية
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>+965 97845119</span><div class="sep"></div>
+    <span>waqifuhum.academy</span><div class="sep"></div>
+    <span>@waqifuhum.academy</span>
+  </div>
+  <div class="note">أكاديمية وَقِفُوهُم — وعيٌّ يُلهِم التعلُّم، وتقنيةٌ تُمكِّن التعليم</div>
+  <a class="back" href="https://waqifuhum.com/">← العودة إلى الموقع</a>
+
+</div>
+
+<script>
+/* ====== الإعداد ====== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4KUXcVwBuIqaEmNdNhXPFJYTqSDAmIA9ElAgoSDIXxV5AJncgh4WQzUFPeVEwIc6A/exec"; // رابط Apps Script — مربوط ✓
+
+// اقتراحات البرامج — تظهر للمستخدم أثناء الكتابة (يبقى الحقل نصاً حراً)
+const PROGRAMS = [
+  "ورشة أساسيات المونتاج للمعلمين (مجانية)",
+  "دورة الذكاء الاصطناعي في خدمة القرآن",
+  "دورة التعليم القرآني الرقمي",
+  "برنامج الدعوة الرقمية"
+];
+
+/* ====== تهيئة اقتراحات البرنامج ====== */
+document.getElementById('programsList').innerHTML =
+  PROGRAMS.map(p=>`<option value="${p}">`).join('');
+
+/* إظهار/إخفاء قسم الدفع */
+const regType = document.getElementById('regType');
+const paySection = document.getElementById('paySection');
+regType.addEventListener('change',()=>{
+  paySection.classList.toggle('show', regType.value === 'دورة مدفوعة');
+});
+
+/* ====== التحقق والإرسال ====== */
+const form = document.getElementById('regForm');
+const btn = document.getElementById('submitBtn');
+
+function setInvalid(el,bad){ el.closest('.field').classList.toggle('invalid',bad); }
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const f = form;
+  let ok = true;
+  const required = ['name','phone','email','age','gender','category','program','regType'];
+  required.forEach(n=>{ const el=f[n]; const bad=!el.value.trim(); setInvalid(el,bad); if(bad) ok=false; });
+  // بريد
+  const emailOk=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim());
+  setInvalid(f.email,!emailOk); if(!emailOk) ok=false;
+  // جوال (أرقام 8+)
+  const phoneOk=/^[0-9+\s]{8,}$/.test(f.phone.value.trim());
+  setInvalid(f.phone,!phoneOk); if(!phoneOk) ok=false;
+  // موافقة
+  if(!f.consent.checked){ document.getElementById('consent').style.outline='2px solid #d6404a'; ok=false; }
+  else { document.getElementById('consent').style.outline='none'; }
+  if(!ok) return;
+
+  const data = new URLSearchParams();
+  data.append('name',f.name.value.trim());
+  data.append('phone',f.phone.value.trim());
+  data.append('email',f.email.value.trim());
+  data.append('location',f.location.value.trim());
+  data.append('age',f.age.value);
+  data.append('gender',f.gender.value);
+  data.append('category',f.category.value);
+  data.append('program',f.program.value.trim());
+  data.append('regType',f.regType.value);
+  data.append('paymentMethod', f.paymentMethod ? f.paymentMethod.value : '');
+  data.append('transferRef', f.transferRef ? f.transferRef.value.trim() : '');
+  data.append('source',f.source.value);
+  data.append('consent', f.consent.checked ? 'نعم' : 'لا');
+
+  btn.disabled=true; btn.textContent='جاري الإرسال…';
+
+  if(!SCRIPT_URL){
+    // وضع المعاينة — قبل ربط Apps Script
+    setTimeout(()=>showSuccess(),700);
+    return;
+  }
+  try{
+    await fetch(SCRIPT_URL,{method:'POST',body:data,mode:'no-cors'});
+    showSuccess();
+  }catch(err){
+    btn.disabled=false; btn.textContent='تأكيد التسجيل';
+    alert('تعذّر الإرسال. تأكدي من الاتصال أو حاولي مجدداً.');
+  }
+});
+
+function showSuccess(){
+  document.getElementById('formWrap').style.display='none';
+  document.getElementById('success').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

@@ -22,8 +22,8 @@
 
 :root{
   --navy:#0D1B3E; --navy2:#1A2540; --navy3:#243154;
-  --gold:#C9A84C; --gold-lt:#E8C97A; --green:#4CAF50;
-  --ink:#F2F4F8; --dim:#A9B2C7; --line:rgba(201,168,76,.22);
+  --gold:#5b8fe0; --gold-lt:#8db8f2; --green:#4CAF50;
+  --ink:#F2F4F8; --dim:#A9B2C7; --line:rgba(59,114,212,.22);
   --glass:rgba(255,255,255,.045);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -51,7 +51,7 @@ h1{font-size:clamp(25px,5vw,37px);font-weight:800;line-height:1.32;margin-bottom
 
 /* بطاقة البرنامج */
 .prog{
-  background:linear-gradient(160deg,rgba(201,168,76,.10),var(--glass));
+  background:linear-gradient(160deg,rgba(59,114,212,.10),var(--glass));
   border:1px solid var(--line); border-radius:18px;
   padding:26px 26px 24px; margin:30px 0 22px;
   box-shadow:0 18px 48px rgba(0,0,0,.34);
@@ -99,7 +99,7 @@ input,select,textarea{
   transition:border-color .16s,box-shadow .16s;
 }
 input:focus,select:focus,textarea:focus{
-  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
+  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(59,114,212,.15)}
 .field.invalid input,.field.invalid select{border-color:#FF6B35}
 .hint{font-size:12px;color:var(--dim)}
 
@@ -107,7 +107,7 @@ input:focus,select:focus,textarea:focus{
 .pay{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
 .pay h3{font-size:16px;color:var(--gold-lt);margin-bottom:6px}
 .pay .sub{margin-bottom:16px}
-.paybox{background:rgba(201,168,76,.07);border:1px dashed var(--line);
+.paybox{background:rgba(59,114,212,.07);border:1px dashed var(--line);
   border-radius:12px;padding:15px 17px;margin-top:14px;font-size:14px;color:var(--dim);display:none}
 .paybox.show{display:block}
 .paybox b{color:var(--gold-lt)}
@@ -120,11 +120,11 @@ input:focus,select:focus,textarea:focus{
 
 button.go{
   width:100%;margin-top:22px;padding:16px;border:none;border-radius:13px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
-  color:var(--navy);font-family:'Cairo';font-size:17.5px;font-weight:800;cursor:pointer;
+  background:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%);
+  color:#fff;font-family:'Cairo';font-size:17.5px;font-weight:800;cursor:pointer;
   transition:transform .14s,box-shadow .14s;
 }
-button.go:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 30px rgba(201,168,76,.3)}
+button.go:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 30px rgba(59,114,212,.3)}
 button.go:disabled{opacity:.6;cursor:not-allowed}
 
 .assure{margin-top:15px;text-align:center;font-size:12.8px;color:var(--dim)}
