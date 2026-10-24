@@ -169,7 +169,7 @@
       // المحاور الثلاثة
       '#row-PIzoX3sY7Z{' + GLASS + ';border-radius:28px!important}' +
       '#col-XMgeTNL3Ya,#col-BjZJwsji5y,#col-kuzwrVNh68{' + GLASS + ';border-radius:22px!important}' +
-      '#paragraph-iNydAnGu_o > *,#paragraph-VBHYLMnTgI > *,#paragraph-V056fnBqV- > *{background:rgba(59,114,212,.16)!important;border:1px solid rgba(141,184,242,.3)!important;border-radius:999px!important;box-shadow:none!important}' +
+      '#section-t8MamvfVEt #paragraph-iNydAnGu_o .cparagraph-iNydAnGu_o.text-output,#section-t8MamvfVEt #paragraph-VBHYLMnTgI .cparagraph-VBHYLMnTgI.text-output,#section-t8MamvfVEt #paragraph-V056fnBqV- .cparagraph-V056fnBqV-.text-output{background:rgba(59,114,212,.16)!important;border:1px solid rgba(141,184,242,.3)!important;border-radius:999px!important;box-shadow:none!important}' +
       // الحاضنة
       '#col-4vZbL7V0S8{background:linear-gradient(160deg,rgba(59,114,212,.26),rgba(27,67,143,.12))!important;background-image:linear-gradient(160deg,rgba(59,114,212,.26),rgba(27,67,143,.12))!important;border:1px solid rgba(141,184,242,.3)!important;box-shadow:0 20px 60px rgba(0,0,0,.35)!important}' +
       '#col-4vZbL7V0S8 .c-nested-column{' + GLASS + ';border-radius:20px!important;transition:transform .25s,border-color .25s}' +
