@@ -31,8 +31,9 @@
       var links = ul.querySelectorAll('a');
       for (var j = 0; j < links.length; j++) {
         if (txt(links[j]) === 'المعسكرات') {
-          var li0 = links[j].closest('li');
-          if (li0) li0.style.display = 'none';
+          // داخل القائمة المنسدلة الكبيرة «برامجنا»: يُخفى العنصر وحده لا القائمة كلها
+          var box = links[j].closest('.mega-menu') ? links[j].closest('.c-sub-heading, .c-heading, .c-wrapper') : links[j].closest('li');
+          if (box) box.style.display = 'none';
         }
       }
       if (ul.querySelector('li.wq-mz-li')) continue;
