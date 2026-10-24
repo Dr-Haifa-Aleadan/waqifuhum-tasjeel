@@ -173,6 +173,7 @@
       // الحاضنة
       '#col-4vZbL7V0S8{background:linear-gradient(160deg,rgba(59,114,212,.26),rgba(27,67,143,.12))!important;background-image:linear-gradient(160deg,rgba(59,114,212,.26),rgba(27,67,143,.12))!important;border:1px solid rgba(141,184,242,.3)!important;box-shadow:0 20px 60px rgba(0,0,0,.35)!important}' +
       '#col-4vZbL7V0S8 .c-nested-column{' + GLASS + ';border-radius:20px!important;transition:transform .25s,border-color .25s}' +
+      '#col-4vZbL7V0S8 .c-nested-column:has(.c-nested-column){background:none!important;background-image:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none}' +
       '#col-4vZbL7V0S8 .c-nested-column:hover{transform:translateY(-3px);border-color:rgba(141,184,242,.45)!important}' +
       // الفرص المتاحة
       '#row-fsNOqzj5uX{' + GLASS + ';border-radius:28px!important}' +
@@ -229,8 +230,12 @@
       var key = null;
       for (var k2 in BY_TITLE) { if (ttl.indexOf(k2) === 0) { key = k2; break; } }
       if (!key) continue;
-      var box = hs[h].closest('.c-nested-column, .c-column');
-      var im2 = box && box.querySelector('.c-image img');
+      var box = hs[h].parentElement, im2 = null;
+      while (box && !/^section-/.test(box.id || '')) {
+        im2 = box.querySelector('.c-image img');
+        if (im2) break;
+        box = box.parentElement;
+      }
       if (im2 && im2.getAttribute('data-wq') !== '1') {
         im2.setAttribute('data-wq', '1');
         im2.removeAttribute('srcset');
