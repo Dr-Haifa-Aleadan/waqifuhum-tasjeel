@@ -19,7 +19,7 @@
   css.id = 'wq-mz-addons-css';
   css.textContent =
     'li.wq-mz-li > a{white-space:nowrap}' +
-    'li.wq-mz-li > a .wq-mz-d{display:inline-block;width:6px;height:6px;background:#d6404a;transform:rotate(45deg);margin-inline-start:7px;vertical-align:middle;box-shadow:0 0 8px rgba(214,64,74,.9)}' +
+    'li.wq-mz-li .wq-mz-d{display:inline-block;width:6px;height:6px;background:#d6404a;transform:rotate(45deg);margin-inline-start:7px;vertical-align:middle;box-shadow:0 0 8px rgba(214,64,74,.9)}' +
     '.wq-rib a.wq-mz-a{font-weight:800}';
   (document.head || document.documentElement).appendChild(css);
 
@@ -53,10 +53,19 @@
       if (!a) continue;
       a.setAttribute('href', PAGE);
       a.removeAttribute('target');
-      a.textContent = 'أهل الميزان';
+      // نغيّر النص وحده ونُبقي بنية العنصر كما هي حتى يأخذ التنسيق نفسه
+      var walker = document.createTreeWalker(li, NodeFilter.SHOW_TEXT, null);
+      var tn, first = null;
+      while ((tn = walker.nextNode())) {
+        if (!tn.nodeValue.trim()) continue;
+        if (!first) { first = tn; tn.nodeValue = 'أهل الميزان'; } else tn.nodeValue = '';
+      }
+      if (!first) a.textContent = 'أهل الميزان';
       var d = document.createElement('span');
       d.className = 'wq-mz-d';
-      a.appendChild(d);
+      (first ? first.parentNode : a).appendChild(d);
+      var links2 = li.querySelectorAll('a');
+      for (var q = 0; q < links2.length; q++) { links2[q].setAttribute('href', PAGE); links2[q].removeAttribute('target'); }
       ref.parentNode.insertBefore(li, ref);
     }
   }
