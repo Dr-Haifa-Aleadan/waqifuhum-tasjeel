@@ -321,11 +321,37 @@
     }
   }
 
+  /* جوال الواجهة (custom-code-U_K6qWM9ZY): كوده يلتقط عناصره قبل أن يعيد إطار الصفحة رسمها،
+     فتتجمّد الخطوات وتختفي البطاقات. نعيد تشغيله مرة واحدة على العناصر الحية بعد اكتمال التهيئة،
+     ونغيّر معرّفات البطاقات حتى تتوقف الحلقة القديمة ولا تتعارض مع الجديدة. */
+  if (IS_HOME) {
+    var wfc = document.createElement('style');
+    wfc.id = 'wq-wf-css';
+    wfc.textContent = '#custom-code-U_K6qWM9ZY .glass-effect-card p{color:#475569!important;-webkit-text-fill-color:#475569!important}';
+    (document.head || document.documentElement).appendChild(wfc);
+  }
+  function restartWorkflow() {
+    if (!IS_HOME || window.__wqWfRestarted) return;
+    var w = document.getElementById('custom-code-U_K6qWM9ZY');
+    if (!w || !document.getElementById('wfContent0') || !document.getElementById('wfRunner')) return;
+    var src = null, ss = document.scripts;
+    for (var i = 0; i < ss.length; i++) {
+      var t = ss[i].textContent || '';
+      if (ss[i].id !== '__NUXT_DATA__' && t.indexOf('wfContent') > -1 && t.indexOf('startWorkflow') > -1) { src = t; break; }
+    }
+    if (!src) return;
+    window.__wqWfRestarted = 1;
+    var cards = w.querySelectorAll('[id^="wfContent"]');
+    for (var c = 0; c < cards.length; c++) cards[c].id = 'wq' + cards[c].id;
+    var fresh = src.split('wfContent').join('wqwfContent');
+    try { (new Function(fresh))(); } catch (e) {}
+  }
+
   // القائمة يديرها إطار الصفحة (Vue)، فلا تُمسّ إلا بعد اكتمال تحميل الصفحة وتهيئتها
   var navReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} }
+    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} }
   }
   function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
   if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
