@@ -300,10 +300,31 @@
     setTimeout(function () { goTo(id, false); }, 1200);
   }
 
+  // شارة الواجهة: كود الواجهة يغيّر نصها مرة واحدة، ثم يعيده إطار الصفحة أحيانًا إلى النص القديم
+  var PILL = 'وعيٌ يُلهِم التعلّم… وتقنيةٌ تُمكِّن التعليم';
+  function fixPill() {
+    if (!IS_HOME) return;
+    var hero = document.getElementById('section--LgraI6xg3');
+    if (!hero) return;
+    var all = hero.querySelectorAll('*'), pt = null;
+    for (var j = 0; j < all.length; j++) {
+      if (all[j].children.length === 0 && /رحلة جديدة في التعليم/.test(all[j].textContent)) { pt = all[j]; break; }
+    }
+    if (!pt) return;
+    pt.textContent = PILL;
+    pt.classList.add('wqc-pilltx');
+    var pp = pt;
+    for (var k = 0; k < 5 && pp; k++) {
+      var cs = getComputedStyle(pp);
+      if (cs.borderRadius !== '0px' && cs.backgroundColor !== 'rgba(0, 0, 0, 0)') { pp.classList.add('wqc-pill'); break; }
+      pp = pp.parentElement;
+    }
+  }
+
   // القائمة يديرها إطار الصفحة (Vue)، فلا تُمسّ إلا بعد اكتمال تحميل الصفحة وتهيئتها
   var navReady = false;
   function run() {
-    try { fixRibbon(); fixButton(); fixHubNav(); } catch (err) {}
+    try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
     if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} }
   }
   function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
