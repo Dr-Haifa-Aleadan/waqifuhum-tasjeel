@@ -47,6 +47,9 @@
       if (!ref) continue;
       var li = ref.cloneNode(true);
       li.classList.add('wq-mz-li');
+      li.removeAttribute('id');
+      var ids = li.querySelectorAll('[id]');
+      for (var r = 0; r < ids.length; r++) ids[r].removeAttribute('id');
       var subs = li.querySelectorAll('ul');
       for (var s = 0; s < subs.length; s++) subs[s].parentNode.removeChild(subs[s]);
       var a = li.querySelector('a');
@@ -65,7 +68,7 @@
       d.className = 'wq-mz-d';
       (first ? first.parentNode : a).appendChild(d);
       var links2 = li.querySelectorAll('a');
-      for (var q = 0; q < links2.length; q++) { links2[q].setAttribute('href', PAGE); links2[q].removeAttribute('target'); }
+      for (var q = 0; q < links2.length; q++) { links2[q].setAttribute('href', PAGE); links2[q].removeAttribute('target'); links2[q].setAttribute('aria-label', 'أهل الميزان'); }
       ref.parentNode.insertBefore(li, ref);
     }
   }
