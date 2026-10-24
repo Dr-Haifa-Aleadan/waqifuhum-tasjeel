@@ -152,6 +152,38 @@
       'a.wq-why-cta:hover{background:rgba(59,114,212,.35);box-shadow:0 0 0 3px rgba(214,64,74,.18)}' +
       'a.wq-why-cta i{width:7px;height:7px;background:#d6404a;transform:rotate(45deg);display:inline-block;box-shadow:0 0 8px rgba(214,64,74,.9)}';
     (document.head || document.documentElement).appendChild(why);
+
+    /* «من الفكرة إلى الأثر» و«حاضنة التطوير المهني» (section-t8MamvfVEt)
+       و«انضم إلى وقفوهم» والفرص المتاحة (section-O-1DgM6XKn) */
+    var NAVY = '{background:radial-gradient(900px 520px at 15% 0%,rgba(59,114,212,.18),transparent 60%),linear-gradient(180deg,#04173a 0%,#001B3E 100%)!important;background-image:radial-gradient(900px 520px at 15% 0%,rgba(59,114,212,.18),transparent 60%),linear-gradient(180deg,#04173a 0%,#001B3E 100%)!important}';
+    var GLASS = 'background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025))!important;background-image:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025))!important;border:1px solid rgba(141,184,242,.18)!important;box-shadow:0 12px 40px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.08)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)';
+    var T = '#section-t8MamvfVEt', J = '#section-O-1DgM6XKn';
+    var more = document.createElement('style');
+    more.id = 'wq-home2-css';
+    more.textContent =
+      T + NAVY + J + NAVY +
+      T + ' .c-heading *,' + J + ' .c-heading *{color:#fff!important;-webkit-text-fill-color:#fff!important}' +
+      T + ' .c-paragraph *,' + J + ' .c-paragraph *{color:#d9e4f7!important;-webkit-text-fill-color:#d9e4f7!important}' +
+      '#paragraph-MaeCEY-KIv *,#paragraph-G127Y5FbzZ *{color:#8db8f2!important;-webkit-text-fill-color:#8db8f2!important}' +
+      '#heading-AaM-tsGKJp *,#heading-prJolFOdUt *,#heading-bxZ_gObQF8 *{text-shadow:0 0 30px rgba(79,140,255,.35)}' +
+      // المحاور الثلاثة
+      '#row-PIzoX3sY7Z{' + GLASS + ';border-radius:28px!important}' +
+      '#col-XMgeTNL3Ya,#col-BjZJwsji5y,#col-kuzwrVNh68{' + GLASS + ';border-radius:22px!important}' +
+      '#paragraph-iNydAnGu_o > *,#paragraph-VBHYLMnTgI > *,#paragraph-V056fnBqV- > *{background:rgba(59,114,212,.16)!important;border:1px solid rgba(141,184,242,.3)!important;border-radius:999px!important;box-shadow:none!important}' +
+      // الحاضنة
+      '#col-4vZbL7V0S8{background:linear-gradient(160deg,rgba(59,114,212,.26),rgba(27,67,143,.12))!important;background-image:linear-gradient(160deg,rgba(59,114,212,.26),rgba(27,67,143,.12))!important;border:1px solid rgba(141,184,242,.3)!important;box-shadow:0 20px 60px rgba(0,0,0,.35)!important}' +
+      '#col-4vZbL7V0S8 .c-nested-column{' + GLASS + ';border-radius:20px!important;transition:transform .25s,border-color .25s}' +
+      '#col-4vZbL7V0S8 .c-nested-column:hover{transform:translateY(-3px);border-color:rgba(141,184,242,.45)!important}' +
+      // الفرص المتاحة
+      '#row-fsNOqzj5uX{' + GLASS + ';border-radius:28px!important}' +
+      '#row-QbCiTAYJUP .c-column{' + GLASS + ';border-radius:20px!important;transition:transform .25s,border-color .25s}' +
+      '#row-QbCiTAYJUP .c-column:hover{transform:translateY(-3px);border-color:rgba(141,184,242,.45)!important}' +
+      '#paragraph-oEPerl2bFl > *{background:rgba(255,255,255,.07)!important;border:1px solid rgba(141,184,242,.25)!important}' +
+      '#button-ioo8b8-htM_btn{background:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%)!important;border:1px solid rgba(141,184,242,.45)!important;border-radius:999px!important;box-shadow:0 10px 30px rgba(27,67,143,.55),inset 0 1px 0 rgba(255,255,255,.3)!important;font-family:Tajawal,"El Messiri",sans-serif!important;font-weight:800!important;padding-left:34px!important;padding-right:34px!important;transition:transform .25s,box-shadow .25s}' +
+      '#button-ioo8b8-htM_btn,#button-ioo8b8-htM_btn *{color:#fff!important;-webkit-text-fill-color:#fff!important;font-family:Tajawal,"El Messiri",sans-serif!important}' +
+      '#button-ioo8b8-htM_btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(27,67,143,.7),0 0 0 4px rgba(214,64,74,.2)!important}' +
+      T + ' .c-image img,' + J + ' #row-QbCiTAYJUP .c-image img{filter:drop-shadow(0 0 14px rgba(59,114,212,.5))!important}';
+    (document.head || document.documentElement).appendChild(more);
   }
 
   function icon(paths) {
@@ -166,6 +198,19 @@
     'image-S0xXOErnNl': icon('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>')
   };
 
+  var BY_TITLE = {
+    'دورات تطوير مهني': icon('<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2.5 9 2.5 12 0v-5"/>'),
+    'مساعد ذكي': icon('<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1"/><path d="M9 13v2M15 13v2"/>'),
+    'محتوى شرعي': icon('<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="m9 10 2 2 4-4"/>'),
+    'شهادات رقمية': icon('<path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/>'),
+    'التحول الرقمي': icon('<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>'),
+    'شبكة وقفية': icon('<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M12 7.5v4M12 11.5 6.5 16M12 11.5l5.5 4.5"/>'),
+    'مدرب شرعي': icon('<path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>'),
+    'مدرب تقني': icon('<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>'),
+    'مستشار': icon('<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/><path d="M16 4a3.5 3.5 0 0 1 0 7M22 20c0-2.8-1.8-5-4.5-5.7"/>'),
+    'منتج محتوى': icon('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>')
+  };
+
   // تعديلات داخل عناصر الصفحة نفسها: بعد اكتمال التهيئة فقط
   function fixWhy() {
     if (!IS_HOME) return;
@@ -175,6 +220,21 @@
         im.setAttribute('data-wq', '1');
         im.removeAttribute('srcset');
         im.setAttribute('src', ICONS[id]);
+      }
+    }
+    // أيقونات حسب عنوان البطاقة (الحاضنة والفرص المتاحة)
+    var hs = document.querySelectorAll('#section-t8MamvfVEt .c-heading, #section-O-1DgM6XKn .c-heading');
+    for (var h = 0; h < hs.length; h++) {
+      var ttl = (hs[h].textContent || '').replace(/\s+/g, ' ').trim();
+      var key = null;
+      for (var k2 in BY_TITLE) { if (ttl.indexOf(k2) === 0) { key = k2; break; } }
+      if (!key) continue;
+      var box = hs[h].closest('.c-nested-column, .c-column');
+      var im2 = box && box.querySelector('.c-image img');
+      if (im2 && im2.getAttribute('data-wq') !== '1') {
+        im2.setAttribute('data-wq', '1');
+        im2.removeAttribute('srcset');
+        im2.setAttribute('src', BY_TITLE[key]);
       }
     }
     var p = document.getElementById('paragraph-jUcuc7RHt2');
