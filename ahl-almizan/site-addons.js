@@ -223,6 +223,13 @@
         im.setAttribute('src', ICONS[id]);
       }
     }
+    // شارات «المحاور الثلاثة»: الملف العام يضع لها تنسيقًا مباشرًا فاتحًا، فنعيدها زجاجية زرقاء
+    var chips = document.querySelectorAll('#section-t8MamvfVEt .wqt-chip');
+    for (var c = 0; c < chips.length; c++) {
+      chips[c].style.setProperty('background', 'rgba(59,114,212,.16)', 'important');
+      chips[c].style.setProperty('border', '1px solid rgba(141,184,242,.3)', 'important');
+      chips[c].style.setProperty('color', '#dbe8ff', 'important');
+    }
     // أيقونات حسب عنوان البطاقة (الحاضنة والفرص المتاحة)
     var hs = document.querySelectorAll('#section-t8MamvfVEt .c-heading, #section-O-1DgM6XKn .c-heading');
     for (var h = 0; h < hs.length; h++) {
