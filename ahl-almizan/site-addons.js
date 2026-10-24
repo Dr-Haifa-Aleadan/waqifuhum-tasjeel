@@ -327,7 +327,10 @@
   if (IS_HOME) {
     var wfc = document.createElement('style');
     wfc.id = 'wq-wf-css';
-    wfc.textContent = '#custom-code-U_K6qWM9ZY .glass-effect-card p{color:#475569!important;-webkit-text-fill-color:#475569!important}';
+    wfc.textContent = '#custom-code-U_K6qWM9ZY .glass-effect-card p{color:#475569!important;-webkit-text-fill-color:#475569!important}' +
+      '#custom-code-U_K6qWM9ZY .step-number-circle.active{background:linear-gradient(180deg,#3b72d4,#1b438f)!important;color:#fff!important;box-shadow:0 0 14px rgba(59,114,212,.7)!important}' +
+      '#wfLineFill{background:linear-gradient(to left,#3b72d4,#8db8f2)!important}' +
+      '#wfRunner{background:#8db8f2!important;box-shadow:0 0 12px rgba(141,184,242,.9)!important}';
     (document.head || document.documentElement).appendChild(wfc);
   }
   function restartWorkflow() {
