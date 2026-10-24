@@ -342,7 +342,13 @@
     if (!src) return;
     window.__wqWfRestarted = 1;
     var cards = w.querySelectorAll('[id^="wfContent"]');
-    for (var c = 0; c < cards.length; c++) cards[c].id = 'wq' + cards[c].id;
+    for (var c = 0; c < cards.length; c++) {
+      cards[c].id = 'wq' + cards[c].id;
+      cards[c].classList.add('hidden');
+      cards[c].classList.remove('card-fade-in', 'card-fade-out');
+    }
+    var steps = w.querySelectorAll('.step-number-circle');
+    for (var q2 = 0; q2 < steps.length; q2++) steps[q2].classList.remove('active');
     var fresh = src.split('wfContent').join('wqwfContent');
     try { (new Function(fresh))(); } catch (e) {}
   }
