@@ -164,7 +164,8 @@
       T + NAVY + J + NAVY +
       T + ' .c-heading *,' + J + ' .c-heading *{color:#fff!important;-webkit-text-fill-color:#fff!important}' +
       T + ' .c-paragraph *,' + J + ' .c-paragraph *{color:#d9e4f7!important;-webkit-text-fill-color:#d9e4f7!important}' +
-      '#paragraph-MaeCEY-KIv *,#paragraph-G127Y5FbzZ *{color:#8db8f2!important;-webkit-text-fill-color:#8db8f2!important}' +
+      T + ' #paragraph-MaeCEY-KIv .text-output,' + J + ' #paragraph-G127Y5FbzZ .text-output{background:rgba(59,114,212,.16)!important;border:1px solid rgba(141,184,242,.3)!important;border-radius:999px!important;box-shadow:none!important}' +
+      T + ' #paragraph-MaeCEY-KIv .text-output *,' + J + ' #paragraph-G127Y5FbzZ .text-output *{color:#8db8f2!important;-webkit-text-fill-color:#8db8f2!important}' +
       '#heading-AaM-tsGKJp *,#heading-prJolFOdUt *,#heading-bxZ_gObQF8 *{text-shadow:0 0 30px rgba(79,140,255,.35)}' +
       // المحاور الثلاثة
       '#row-PIzoX3sY7Z{' + GLASS + ';border-radius:28px!important}' +
