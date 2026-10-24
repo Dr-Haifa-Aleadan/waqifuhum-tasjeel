@@ -2,7 +2,8 @@
    1) رابط «أهل الميزان» في القائمة (سطح المكتب والجوال)
    2) إخفاء «المعسكرات» من القائمة
    3) شريط الرئيسية العلوي يقود إلى صفحة أهل الميزان
-   4) الزر العائم «سجّل» يقود إلى القائمة المؤسِّسة حتى نهاية الحملة (٢٣ نوفمبر ٢٠٢٦)
+   4) رابط «أهل الميزان» في قائمة مركز المصادر والحقائب المجانية
+   5) الزر العائم «سجّل» يقود إلى القائمة المؤسِّسة حتى نهاية الحملة (٢٣ نوفمبر ٢٠٢٦)
    بعد نهاية الحملة يعود الشريط والزر العائم إلى سلوكهما الأصلي تلقائيًا، ويبقى رابط القائمة. */
 (function () {
   if (window.__wqMzAddons) return;
@@ -60,6 +61,20 @@
     }
   }
 
+  // قائمة صفحتي «مركز المصادر» و«الحقائب المجانية» (داخل #wq-hub)
+  function fixHubNav() {
+    var host = document.getElementById('wq-hub');
+    var root = host && host.shadowRoot;
+    if (!root) return;
+    var nav = root.querySelector('nav.nav');
+    if (!nav || nav.querySelector('.wq-mz-a')) return;
+    var a = document.createElement('a');
+    a.className = 'wq-mz-a';
+    a.href = PAGE;
+    a.textContent = 'أهل الميزان';
+    nav.appendChild(a);
+  }
+
   function fixRibbon() {
     if (!CAMPAIGN || !IS_HOME) return;
     var rib = document.querySelector('.wq-rib');
@@ -101,7 +116,7 @@
   // القائمة يديرها إطار الصفحة (Vue)، فلا تُمسّ إلا بعد اكتمال تحميل الصفحة وتهيئتها
   var navReady = false;
   function run() {
-    try { fixRibbon(); fixButton(); } catch (err) {}
+    try { fixRibbon(); fixButton(); fixHubNav(); } catch (err) {}
     if (navReady) { try { fixNav(); } catch (err2) {} }
   }
   function armNav() { setTimeout(function () { navReady = true; run(); }, 1800); }
