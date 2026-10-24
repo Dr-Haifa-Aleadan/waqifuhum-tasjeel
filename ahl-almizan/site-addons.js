@@ -353,11 +353,49 @@
     try { (new Function(fresh))(); } catch (e) {}
   }
 
+  /* التذييل: ملف الهوية يضيف شارتي الترخيص وزر «جميع روابطنا» مرة واحدة،
+     وقد يعيد إطار الصفحة رسم التذييل بعدها فيختفيان. نعيدهما إن غابا (بالتنسيق نفسه). */
+  function fixFooter() {
+    var f = document.getElementById('section-RHoFYtH5zD');
+    if (!f) return;
+    if (!f.querySelector('.wqt-lic')) {
+      var pr = [].slice.call(f.querySelectorAll('p,div')).filter(function (e) { return /مؤسسة تعليمية/.test(e.textContent); })
+        .sort(function (a, b) { return a.textContent.length - b.textContent.length; })[0];
+      if (pr) {
+        var d = document.createElement('div');
+        d.className = 'wqt-lic';
+        d.innerHTML = '<span><b>رقم الترخيص</b>٥٤٢٨٢٥</span><span><b>سنة التأسيس</b>٢٠٢٤</span>';
+        var host = pr.closest('.c-paragraph,.c-heading') || pr;
+        host.parentNode.insertBefore(d, host.nextSibling);
+        var up = d.parentElement;
+        for (var u = 0; u < 6 && up; u++) { up.style.setProperty('height', 'auto', 'important'); up.style.setProperty('min-height', '0', 'important'); up = up.parentElement; }
+      }
+    }
+    if (!f.querySelector('.wqt-reach')) {
+      var ig = [].slice.call(f.querySelectorAll('a')).filter(function (a) { return /instagram/.test(a.href); })[0];
+      var row = ig;
+      for (var i = 0; i < 6 && row; i++) { if (row.querySelectorAll('a').length >= 5) break; row = row.parentElement; }
+      if (row) {
+        var r = document.createElement('a');
+        r.className = 'wqt-reach';
+        r.href = 'https://reach.link/waqifuhum.academy';
+        r.target = '_blank';
+        r.rel = 'noopener';
+        r.innerHTML = '<i></i>جميع روابطنا في مكان واحد <span>↗</span>';
+        var wr = document.createElement('div');
+        wr.style.cssText = 'width:100%;display:flex;justify-content:flex-start;flex-basis:100%';
+        wr.appendChild(r);
+        var host2 = row.closest('.c-column') || row.parentNode;
+        host2.appendChild(wr);
+      }
+    }
+  }
+
   // القائمة يديرها إطار الصفحة (Vue)، فلا تُمسّ إلا بعد اكتمال تحميل الصفحة وتهيئتها
   var navReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} }
+    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} }
   }
   function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
   if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
