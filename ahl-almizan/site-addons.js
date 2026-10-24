@@ -19,7 +19,7 @@
   css.id = 'wq-mz-addons-css';
   css.textContent =
     'li.wq-mz-li > a{white-space:nowrap}' +
-    'li.wq-mz-li .wq-mz-d{display:inline-block;width:6px;height:6px;background:#d6404a;transform:rotate(45deg);margin-inline-start:7px;vertical-align:middle;box-shadow:0 0 8px rgba(214,64,74,.9)}' +
+    'li.wq-mz-li .wq-mz-d::before,li.wq-mz-li .wq-mz-d::after{content:none!important;display:none!important}' +
     '.wq-rib a.wq-mz-a{font-weight:800}';
   (document.head || document.documentElement).appendChild(css);
 
@@ -64,8 +64,10 @@
         if (!first) { first = tn; tn.nodeValue = 'أهل الميزان'; } else tn.nodeValue = '';
       }
       if (!first) a.textContent = 'أهل الميزان';
-      var d = document.createElement('span');
+      var d = document.createElement('i');
       d.className = 'wq-mz-d';
+      d.setAttribute('aria-hidden', 'true');
+      d.style.cssText = 'display:inline-block!important;width:6px!important;height:6px!important;min-width:0!important;padding:0!important;border:0!important;background:#d6404a!important;transform:rotate(45deg)!important;margin:0 7px!important;vertical-align:middle!important;box-shadow:0 0 8px rgba(214,64,74,.9)!important;font-size:0!important;line-height:0!important';
       (first ? first.parentNode : a).appendChild(d);
       var links2 = li.querySelectorAll('a');
       for (var q = 0; q < links2.length; q++) { links2[q].setAttribute('href', PAGE); links2[q].removeAttribute('target'); links2[q].setAttribute('aria-label', 'أهل الميزان'); }
