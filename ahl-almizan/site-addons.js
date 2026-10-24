@@ -358,6 +358,7 @@
   function fixFooter() {
     var f = document.getElementById('section-RHoFYtH5zD');
     if (!f) return;
+    f.dataset.wqt = '1'; // يمنع ملف الهوية من إضافة نسخة ثانية
     if (!f.querySelector('.wqt-lic')) {
       var pr = [].slice.call(f.querySelectorAll('p,div')).filter(function (e) { return /مؤسسة تعليمية/.test(e.textContent); })
         .sort(function (a, b) { return a.textContent.length - b.textContent.length; })[0];
