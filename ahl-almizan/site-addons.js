@@ -127,13 +127,113 @@
     }, true);
   }
 
+  /* ---------- قسم «لماذا وقفوهم؟» في الرئيسية (section-dna-y7UcRY) ---------- */
+  if (IS_HOME) {
+    var W = '#section-dna-y7UcRY';
+    var CARDS = ['#col-XYSTF_e9Ha', '#col-bGFXnuldmx', '#col-G62ZxbzvA0', '#col-UKDIXb1iy1'];
+    var all = function (suffix) { return CARDS.map(function (c) { return c + suffix; }).join(','); };
+    var why = document.createElement('style');
+    why.id = 'wq-why-css';
+    why.textContent =
+      W + '{background:radial-gradient(900px 520px at 85% 0%,rgba(59,114,212,.22),transparent 60%),radial-gradient(700px 420px at 10% 100%,rgba(59,114,212,.12),transparent 60%),linear-gradient(180deg,#001B3E 0%,#04173a 100%)!important}' +
+      W + ' #paragraph-z-KZr_ElNo *{color:#8db8f2!important;-webkit-text-fill-color:#8db8f2!important}' +
+      W + ' #heading-X1mzuS4Xjz *{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 0 30px rgba(79,140,255,.35)}' +
+      all('') + '{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025))!important;background-image:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025))!important;border:1px solid rgba(141,184,242,.18)!important;border-radius:24px!important;box-shadow:0 12px 40px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}' +
+      '#col-XYSTF_e9Ha{background:linear-gradient(160deg,rgba(59,114,212,.32),rgba(27,67,143,.16))!important;background-image:linear-gradient(160deg,rgba(59,114,212,.32),rgba(27,67,143,.16))!important;border-color:rgba(141,184,242,.35)!important}' +
+      all(' .c-row') + ',' + all(' .c-column') + '{background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important}' +
+      all(' .c-heading *') + '{color:#fff!important;-webkit-text-fill-color:#fff!important}' +
+      all(' .c-paragraph *') + '{color:#d9e4f7!important;-webkit-text-fill-color:#d9e4f7!important}' +
+      '#col-UKDIXb1iy1{display:flex!important;flex-direction:column;justify-content:center}' +
+      '#paragraph-O1-2oRcOWf{display:flex!important;justify-content:center;margin:0 auto 8px!important}' +
+      '#paragraph-O1-2oRcOWf .wqt-chip,#paragraph-O1-2oRcOWf > div{background:rgba(59,114,212,.16)!important;border:1px solid rgba(141,184,242,.3)!important;border-radius:999px!important;padding:6px 16px!important;width:fit-content!important;margin:0 auto!important}' +
+      '#paragraph-O1-2oRcOWf *{color:#dbe8ff!important;-webkit-text-fill-color:#dbe8ff!important}' +
+      '#image-8vnU0ElzXT img,#image-CLrGCNOQe0 img,#image-S0xXOErnNl img{filter:drop-shadow(0 0 14px rgba(59,114,212,.55))!important}' +
+      'a.wq-why-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(141,184,242,.4);color:#fff!important;font-weight:700;font-size:15px;text-decoration:none!important;transition:background .25s,box-shadow .25s}' +
+      'a.wq-why-cta:hover{background:rgba(59,114,212,.35);box-shadow:0 0 0 3px rgba(214,64,74,.18)}' +
+      'a.wq-why-cta i{width:7px;height:7px;background:#d6404a;transform:rotate(45deg);display:inline-block;box-shadow:0 0 8px rgba(214,64,74,.9)}';
+    (document.head || document.documentElement).appendChild(why);
+  }
+
+  function icon(paths) {
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 56 56">' +
+      '<rect x="1" y="1" width="54" height="54" rx="15" fill="#13336b" stroke="#8db8f2" stroke-opacity=".45"/>' +
+      '<g transform="translate(16 16)" fill="none" stroke="#dbe8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + paths + '</g></svg>';
+    return 'data:image/svg+xml,' + encodeURIComponent(svg);
+  }
+  var ICONS = {
+    'image-8vnU0ElzXT': icon('<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M10 2v8l3-2.2L16 10V2"/>'),
+    'image-CLrGCNOQe0': icon('<circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/>'),
+    'image-S0xXOErnNl': icon('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>')
+  };
+
+  // تعديلات داخل عناصر الصفحة نفسها: بعد اكتمال التهيئة فقط
+  function fixWhy() {
+    if (!IS_HOME) return;
+    for (var id in ICONS) {
+      var im = document.querySelector('#' + id + ' img');
+      if (im && im.getAttribute('data-wq') !== '1') {
+        im.setAttribute('data-wq', '1');
+        im.removeAttribute('srcset');
+        im.setAttribute('src', ICONS[id]);
+      }
+    }
+    var p = document.getElementById('paragraph-jUcuc7RHt2');
+    if (!p) return;
+    var w = document.createTreeWalker(p, NodeFilter.SHOW_TEXT, null), tn;
+    while ((tn = w.nextNode())) {
+      if (tn.nodeValue.indexOf('بين يدي أيديكم') > -1) tn.nodeValue = tn.nodeValue.replace('بين يدي أيديكم', 'بين أيديكم');
+    }
+    if (CAMPAIGN && !document.querySelector('a.wq-why-cta')) {
+      var a = document.createElement('a');
+      a.className = 'wq-why-cta';
+      a.href = PAGE;
+      a.innerHTML = '<i></i>هذا الميزان صار مجتمعًا · تعرّف على «أهل الميزان»';
+      p.appendChild(a);
+    }
+  }
+
+  // «انضم لفريقنا» وكل رابط إلى قسم في الصفحة: الوصول بدقة تحت الرأس الثابت
+  function headerOffset() {
+    var h = document.getElementById('section--O9UgSaDmM');
+    var b = h ? h.getBoundingClientRect().bottom : 90;
+    return Math.max(70, Math.min(b, 200)) + 14;
+  }
+  function goTo(id, smooth) {
+    var el = document.getElementById(id);
+    if (!el) return false;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+    window.scrollTo({ top: y, behavior: smooth ? 'smooth' : 'auto' });
+    return true;
+  }
+  if (IS_HOME) {
+    window.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href*="#section-"]') : null;
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      var hostOk = href.charAt(0) === '#' || /^https?:\/\/(www\.)?waqifuhum\.com\/?#/.test(href);
+      if (!hostOk) return;
+      var id = href.split('#')[1];
+      if (!document.getElementById(id)) return;
+      e.preventDefault();
+      goTo(id, true);
+      setTimeout(function () { goTo(id, false); }, 900);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+    }, true);
+  }
+  function fixHashOnLoad() {
+    var id = (location.hash || '').slice(1);
+    if (!id || !/^section-/.test(id)) return;
+    goTo(id, false);
+    setTimeout(function () { goTo(id, false); }, 1200);
+  }
+
   // القائمة يديرها إطار الصفحة (Vue)، فلا تُمسّ إلا بعد اكتمال تحميل الصفحة وتهيئتها
   var navReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} }
+    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} }
   }
-  function armNav() { setTimeout(function () { navReady = true; run(); }, 1800); }
+  function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
   if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
 
   var n = 0;
