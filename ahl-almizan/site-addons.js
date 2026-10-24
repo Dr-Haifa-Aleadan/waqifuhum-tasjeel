@@ -98,15 +98,22 @@
     }, true);
   }
 
-  function run() { try { fixNav(); fixRibbon(); fixButton(); } catch (err) {} }
+  // القائمة يديرها إطار الصفحة (Vue)، فلا تُمسّ إلا بعد اكتمال تحميل الصفحة وتهيئتها
+  var navReady = false;
+  function run() {
+    try { fixRibbon(); fixButton(); } catch (err) {}
+    if (navReady) { try { fixNav(); } catch (err2) {} }
+  }
+  function armNav() { setTimeout(function () { navReady = true; run(); }, 1800); }
+  if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
 
   var n = 0;
-  var iv = setInterval(function () { run(); if (++n > 20) clearInterval(iv); }, 700);
+  var iv = setInterval(function () { run(); if (++n > 30) clearInterval(iv); }, 700);
   if (window.MutationObserver) {
     var t = null;
     new MutationObserver(function () {
       if (t) return;
-      t = setTimeout(function () { t = null; run(); }, 250);
+      t = setTimeout(function () { t = null; run(); }, 300);
     }).observe(document.documentElement, { childList: true, subtree: true });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
