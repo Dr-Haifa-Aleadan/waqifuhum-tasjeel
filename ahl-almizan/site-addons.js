@@ -436,6 +436,37 @@
     sr.appendChild(st);
   }
 
+
+  // «الهدايا المجانية»: اسم التخصص في عنوان كل حقيبة بالأحمر المتوهّج، وحركة خفيفة للبطاقات
+  function fixKitsSoul() {
+    if (!/^\/free-kits\/?$/.test(location.pathname)) return;
+    var h = document.getElementById('wq-hub');
+    var sr = h && h.shadowRoot;
+    if (!sr) return;
+    var ts = sr.querySelectorAll('.gc .gt');
+    for (var i = 0; i < ts.length; i++) {
+      if (ts[i].querySelector('.wq-sp')) continue;
+      var m = /^(حقيبة\s+(?:معلّم\s+)?)(.+)$/.exec((ts[i].textContent || '').trim());
+      if (!m) continue;
+      ts[i].innerHTML = '<span class="wq-pre">' + m[1] + '</span><span class="wq-sp">' + m[2] + '</span>';
+    }
+    if (sr.getElementById('wq-kits-soul')) return;
+    var st = document.createElement('style');
+    st.id = 'wq-kits-soul';
+    st.textContent =
+      '.gc .gt .wq-pre{color:#e6eefc}' +
+      '.gc .gt .wq-sp{color:#ff7a86;text-shadow:0 0 18px rgba(224,41,59,.55),0 0 2px rgba(255,122,134,.6);position:relative;display:inline-block}' +
+      '.gc .gt .wq-sp::after{content:"";position:absolute;right:0;left:0;bottom:-4px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#e0293b,transparent);transform:scaleX(0);transition:transform .45s ease}' +
+      '.gc:hover .gt .wq-sp::after{transform:scaleX(1)}' +
+      '.gc{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}' +
+      '.gc:hover{transform:translateY(-4px);border-color:rgba(255,122,134,.45)!important;box-shadow:0 18px 44px rgba(0,0,0,.35),0 0 0 1px rgba(224,41,59,.15),0 0 30px rgba(224,41,59,.12)!important}' +
+      '.gc .gi{animation:wqGlow 3.6s ease-in-out infinite}' +
+      '.gc:nth-child(2n) .gi{animation-delay:-1.2s}.gc:nth-child(3n) .gi{animation-delay:-2.4s}' +
+      '@keyframes wqGlow{0%,100%{box-shadow:0 0 0 1px rgba(141,184,242,.22)}50%{box-shadow:0 0 0 1px rgba(141,184,242,.45),0 0 22px rgba(59,114,212,.55)}}' +
+      '@media (prefers-reduced-motion:reduce){.gc .gi{animation:none}}';
+    sr.appendChild(st);
+  }
+
   // الملف العام يضع على الشارات ألوانًا فاتحة مباشرة (!important)، فنعيدها زجاجية في الأقسام الداكنة
   function fixDarkInline() {
     if (!IS_HOME) return;
@@ -693,7 +724,7 @@
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
     if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
-    try { fixHubDark(); } catch (err11) {}
+    try { fixHubDark(); } catch (err11) {} try { fixKitsSoul(); } catch (err12) {}
   }
   function hyDone() {
     try { if (window.useNuxtApp) { var na = window.useNuxtApp(); if (na && na.isHydrating) return false; } } catch (e) {}
