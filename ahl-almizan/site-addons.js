@@ -321,6 +321,7 @@
       (document.head || document.documentElement).appendChild(st);
     }
     var secs = document.querySelectorAll('#preview-container .c-section');
+    var heroSeen = false;
     for (var i = 0; i < secs.length; i++) {
       var sec = secs[i];
       if (sec.id === 'section-RHoFYtH5zD' || sec.id === 'section--O9UgSaDmM' || sec.id === 'section-0FyjcBSLx4' || (sec.getBoundingClientRect().top + scrollY < 60 && sec.querySelector('.nav-menu, [class*="menu-item"]'))) continue;
@@ -329,13 +330,14 @@
         // قسم فاتح أو شفاف فوق خلفية فاتحة
         if (!/navy/.test(sec.dataset.wqDk || '') || !sec.style.getPropertyValue('background')) {
           var bi = getComputedStyle(sec).backgroundImage;
-          var keepHero = bi && /url\(/.test(bi) && i <= 3 && sec.getBoundingClientRect().top + scrollY < 400;
+          var keepHero = bi && /url\(/.test(bi) && !heroSeen && sec.getBoundingClientRect().top + scrollY < 200;
           if (!keepHero) {
             sec.style.setProperty('background', DK_NAVY, 'important');
             sec.dataset.wqDk = 'navy';
           }
         }
       }
+      heroSeen = true;
       var els = sec.querySelectorAll('*');
       for (var j = 0; j < els.length; j++) {
         var el = els[j];
