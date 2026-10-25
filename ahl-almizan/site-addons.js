@@ -413,6 +413,10 @@
     st.textContent =
       ':host{--paper:#001B3E;--paper-2:#04173a;--card:rgba(255,255,255,.06);--line:rgba(141,184,242,.22);--ink:#ffffff;--muted:#cfd9ea;--sky-ink:#8db8f2;--ok-bg:rgba(59,114,212,.18);--ok:#a9ccff;--warn-bg:rgba(59,114,212,.18);--warn:#dbe8ff;--sh:0 12px 40px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);color-scheme:dark}' +
       'header.top{--ink:#14253d;--muted:#586577;--card:#ffffff;--line:#dce6f0;--sky-ink:#1f74a6}' +
+      '.issue{color:#dbe8ff!important;background:rgba(59,114,212,.16)!important;border:1px solid rgba(141,184,242,.3)!important}' +
+      '.item p,.facts li{color:#d9e4f7!important}' +
+      '.tag.ref{color:#dbe8ff!important;background:rgba(141,184,242,.14)!important}' +
+      'pre{color:#e6eefc!important}' +
       '.gb{background:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%)!important;color:#fff!important;border:1px solid rgba(141,184,242,.45)!important;box-shadow:0 8px 22px rgba(27,67,143,.45)!important}';
     sr.appendChild(st);
   }
