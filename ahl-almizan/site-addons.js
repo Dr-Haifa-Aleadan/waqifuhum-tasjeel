@@ -186,6 +186,79 @@
       '#button-ioo8b8-htM_btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(27,67,143,.7),0 0 0 4px rgba(214,64,74,.2)!important}' +
       T + ' .c-image img,' + J + ' #row-QbCiTAYJUP .c-image img{filter:drop-shadow(0 0 14px rgba(59,114,212,.5))!important}';
     (document.head || document.documentElement).appendChild(more);
+
+    /* الأقسام البيضاء المتبقية: «اختر مسارك» (#wq-paths)، «ورشاتنا المجانية» (section-ALEiwwuWjd)،
+       «ماذا قالوا عنا» (section-gBQqcElr9i)، «كن أول من يعلم» و«قبل أن تبدأ» (#wq-join) */
+    var NAVY_B = '{background:radial-gradient(900px 520px at 85% 0%,rgba(59,114,212,.2),transparent 60%),linear-gradient(180deg,#001B3E 0%,#04173a 100%)!important;background-image:radial-gradient(900px 520px at 85% 0%,rgba(59,114,212,.2),transparent 60%),linear-gradient(180deg,#001B3E 0%,#04173a 100%)!important}';
+    var BTN = 'background:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%)!important;background-image:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%)!important;border:1px solid rgba(141,184,242,.45)!important;box-shadow:0 10px 30px rgba(27,67,143,.5),inset 0 1px 0 rgba(255,255,255,.3)!important;color:#fff!important;-webkit-text-fill-color:#fff!important';
+    var P = '#wq-paths', WS = '#section-ALEiwwuWjd', TS = '#section-gBQqcElr9i', JN = '#wq-join';
+    var rest = document.createElement('style');
+    rest.id = 'wq-home3-css';
+    rest.textContent =
+      P + NAVY + WS + NAVY_B + TS + NAVY + JN + NAVY_B +
+      // عناوين مشتركة
+      P + ' .wqh-h,' + JN + ' .wqh-h{color:#fff!important;text-shadow:0 0 30px rgba(79,140,255,.35)}' +
+      P + ' .wqh-h b,' + JN + ' .wqh-h b{color:#8db8f2!important}' +
+      P + ' .wqh-sub,' + JN + ' .wqh-sub{color:#cfd9ea!important}' +
+      P + ' .wqh-eye,' + JN + ' .wqh-eye{background:rgba(59,114,212,.16)!important;border:1px solid rgba(141,184,242,.3)!important;color:#dbe8ff!important}' +
+      // اختر مسارك
+      P + ' .wqh-card{' + GLASS + ';border-radius:24px!important}' +
+      P + ' .wqh-card:hover{border-color:rgba(141,184,242,.45)!important}' +
+      P + ' .wqh-card h3{color:#fff!important}' +
+      P + ' .wqh-card > p{color:#d9e4f7!important}' +
+      P + ' .wqh-ic{background:rgba(59,114,212,.2)!important;border:1px solid rgba(141,184,242,.3);box-shadow:0 0 18px rgba(59,114,212,.35)}' +
+      P + ' .wqh-list a{background:rgba(255,255,255,.06)!important;border:1px solid rgba(141,184,242,.14)!important;color:#e6eefc!important}' +
+      P + ' .wqh-list a:hover{background:rgba(59,114,212,.25)!important;border-color:rgba(141,184,242,.4)!important}' +
+      P + ' .wqh-tag{background:rgba(141,184,242,.14)!important;color:#dbe8ff!important;border:1px solid rgba(141,184,242,.25)}' +
+      P + ' .wqh-free{color:#a9ccff!important}' +
+      P + ' .wqh-btn{' + BTN + ';border-radius:999px!important}' +
+      // ورشاتنا المجانية
+      WS + ' .backsec02{background-image:none!important}' +
+      '#col-sNc-PQz_BM{' + GLASS + ';border-radius:32px!important}' +
+      '#col-sNc-PQz_BM .oveheeed01{' + GLASS + ';border-radius:22px!important;overflow:hidden;transition:transform .25s,border-color .25s}' +
+      '#col-sNc-PQz_BM .oveheeed01:hover{transform:translateY(-3px);border-color:rgba(141,184,242,.45)!important}' +
+      WS + ' .c-heading *{color:#fff!important;-webkit-text-fill-color:#fff!important}' +
+      WS + ' .c-paragraph *{color:#d9e4f7!important;-webkit-text-fill-color:#d9e4f7!important}' +
+      WS + ' .c-button a{' + BTN + '}' +
+      WS + ' .c-button a *{color:#fff!important;-webkit-text-fill-color:#fff!important}' +
+      // ماذا قالوا عنا
+      TS + ' .wm-testimonials-section{background:transparent!important}' +
+      TS + ' .wm-bg-pattern{opacity:.06!important}' +
+      TS + ' .wm-section-title{color:#fff!important;text-shadow:0 0 30px rgba(79,140,255,.35)}' +
+      TS + ' .wm-section-desc{color:#cfd9ea!important}' +
+      TS + ' .wm-testimonial-card{' + GLASS + '}' +
+      TS + ' .wm-avatar{background:rgba(59,114,212,.22)!important;color:#dbe8ff!important;border-color:rgba(141,184,242,.3)!important}' +
+      TS + ' .wm-card-name{color:#fff!important}' +
+      TS + ' .wm-card-role{color:#8db8f2!important}' +
+      TS + ' .wm-card-text{color:#d9e4f7!important}' +
+      // كن أول من يعلم
+      JN + ' .wqh-sub-card{' + GLASS + ';border-radius:32px!important}' +
+      JN + ' .wqh-checks li{color:#e6eefc!important}' +
+      JN + ' .wqh-checks li::before{background:rgba(59,114,212,.3)!important;color:#dbe8ff!important;box-shadow:0 0 10px rgba(59,114,212,.5)}' +
+      JN + ' .wqh-sub-form{background:#fff!important;border-radius:22px!important;box-shadow:0 16px 44px rgba(0,0,0,.3)!important}' +
+      // قبل أن تبدأ
+      JN + ' .wqh-faq details{' + GLASS + ';border-radius:18px!important}' +
+      JN + ' .wqh-faq summary{color:#fff!important}' +
+      JN + ' .wqh-faq summary::after{color:#8db8f2!important}' +
+      JN + ' .wqh-faq p{color:#d9e4f7!important}';
+    (document.head || document.documentElement).appendChild(rest);
+  }
+
+  // الملف العام يضع على الشارات ألوانًا فاتحة مباشرة (!important)، فنعيدها زجاجية في الأقسام الداكنة
+  function fixDarkInline() {
+    if (!IS_HOME) return;
+    var els = document.querySelectorAll('#wq-paths [style],#wq-join [style],#section-ALEiwwuWjd [style],#section-gBQqcElr9i [style]');
+    for (var i = 0; i < els.length; i++) {
+      var st = els[i].style;
+      if (els[i].closest('.c-button, iframe, .ep-iFrameContainer')) continue;
+      if (st.getPropertyPriority('color') === 'important' && st.getPropertyValue('color') !== '#dbe8ff') st.setProperty('color', '#dbe8ff', 'important');
+      if (st.getPropertyPriority('-webkit-text-fill-color') === 'important') st.setProperty('-webkit-text-fill-color', '#dbe8ff', 'important');
+      var bg = st.getPropertyValue('background') || st.getPropertyValue('background-color');
+      if ((st.getPropertyPriority('background') === 'important' || st.getPropertyPriority('background-color') === 'important') && bg && !/transparent|rgba\(59, ?114, ?212/.test(bg)) {
+        st.setProperty('background', 'rgba(59,114,212,.16)', 'important');
+        st.setProperty('border', '1px solid rgba(141,184,242,.3)', 'important');
+      }
+    }
   }
 
   function icon(paths) {
@@ -399,7 +472,7 @@
   var navReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} }
+    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} }
   }
   function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
   if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
