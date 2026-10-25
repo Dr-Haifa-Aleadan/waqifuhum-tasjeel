@@ -271,7 +271,7 @@
   }
 
   /* ---------- الصفحات الداخلية: تحويل الأقسام الفاتحة إلى كحلي زجاجي ---------- */
-  var DARK_RE = /^\/(about-us|contact-us|training-team|our-products|free-kits|resources)\/?$/;
+  var DARK_RE = /^\/(about-us|contact-us|training-team|our-products)\/?$/;
   var IS_DARK_PAGE = DARK_RE.test(location.pathname);
   function rgbaOf(s) {
     var m = /rgba?\(([^)]+)\)/.exec(s || '');
@@ -327,7 +327,7 @@
       var sb = rgbaOf(getComputedStyle(sec).backgroundColor);
       if (!(sb && sb.a > 0.2 && lum(sb) < 0.35)) {
         // قسم فاتح أو شفاف فوق خلفية فاتحة
-        if (!sec.querySelector('.c-section') && !/navy/.test(sec.dataset.wqDk || '')) {
+        if (!/navy/.test(sec.dataset.wqDk || '') || !sec.style.getPropertyValue('background')) {
           var bi = getComputedStyle(sec).backgroundImage;
           var keepHero = bi && /url\(/.test(bi) && i <= 3 && sec.getBoundingClientRect().top + scrollY < 400;
           if (!keepHero) {
@@ -398,6 +398,23 @@
         el.__wqDk = 1; el.__wqDkS = el.getAttribute('style');
       }
     }
+  }
+
+
+  // صفحتا «الهدايا المجانية» و«مركز المصادر» مبنيتان داخل #wq-hub (Shadow DOM) بمتغيرات ألوان، فنعيد تعريفها كحلية
+  var HUB_DARK_RE = /^\/(free-kits|resources)\/?$/;
+  function fixHubDark() {
+    if (!HUB_DARK_RE.test(location.pathname)) return;
+    var h = document.getElementById('wq-hub');
+    var sr = h && h.shadowRoot;
+    if (!sr || sr.getElementById('wq-hub-dark')) return;
+    var st = document.createElement('style');
+    st.id = 'wq-hub-dark';
+    st.textContent =
+      ':host{--paper:#001B3E;--paper-2:#04173a;--card:rgba(255,255,255,.06);--line:rgba(141,184,242,.22);--ink:#ffffff;--muted:#cfd9ea;--sky-ink:#8db8f2;--ok-bg:rgba(59,114,212,.18);--ok:#a9ccff;--warn-bg:rgba(59,114,212,.18);--warn:#dbe8ff;--sh:0 12px 40px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);color-scheme:dark}' +
+      'header.top{--ink:#14253d;--muted:#586577;--card:#ffffff;--line:#dce6f0;--sky-ink:#1f74a6}' +
+      '.gb{background:linear-gradient(180deg,#3b72d4 0%,#2556b5 55%,#1b438f 100%)!important;color:#fff!important;border:1px solid rgba(141,184,242,.45)!important;box-shadow:0 8px 22px rgba(27,67,143,.45)!important}';
+    sr.appendChild(st);
   }
 
   // الملف العام يضع على الشارات ألوانًا فاتحة مباشرة (!important)، فنعيدها زجاجية في الأقسام الداكنة
@@ -628,7 +645,7 @@
   var navReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
+    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} try { fixHubDark(); } catch (err11) {} }
   }
   function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
   if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
