@@ -721,9 +721,11 @@
 
   // القائمة يديرها إطار الصفحة (Vue)، فلا تُمسّ إلا بعد اكتمال تحميل الصفحة وتهيئتها
   var navReady = false;
+  // القائمة لا تُلمس إلا بعد ١٫٨ ثانية من اكتمال التحميل: تعديلها أبكر يجعل إطار الصفحة يُسقط عناصر منها
+  var menuReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
+    if (navReady) { if (menuReady) { try { fixNav(); } catch (err2) {} } try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
     try { fixHubDark(); } catch (err11) {} try { fixKitsSoul(); } catch (err12) {}
   }
   function hyDone() {
@@ -736,7 +738,7 @@
     (function poll() {
       if (hyDone() || Date.now() - t0 > 1800) {
         setTimeout(function () { navReady = true; run(); unveil(); try { fixHashOnLoad(); } catch (e4) {} }, 200);
-        setTimeout(run, 1800);
+        setTimeout(function () { menuReady = true; run(); }, 1800);
       } else setTimeout(poll, 50);
     })();
   }
