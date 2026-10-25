@@ -45,7 +45,7 @@
     if (!document.getElementById('wq-dark-css')) {
       var st = document.createElement('style');
       st.id = 'wq-dark-css';
-      st.textContent = 'html,body,#preview-container{background:#001B3E!important}' +
+      st.textContent = 
         '.wq-dk-glass{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}' +
         '.wq-dk-glass:hover{border-color:rgba(141,184,242,.4)!important}';
       (document.head || document.documentElement).appendChild(st);
@@ -72,6 +72,11 @@
         if (dkSeen && dkSeen.has(el)) continue;
         var tag = el.tagName;
         if (tag === 'IMG') { dkIcon(el); continue; }
+        if (tag === 'svg' || tag === 'SVG') {
+          var sc = rgbaOf(getComputedStyle(el).color);
+          if (sc && lum(sc) < 0.5 && !isChrome(el)) el.style.setProperty('color', '#8db8f2', 'important');
+          continue;
+        }
         if (tag === 'svg' || tag === 'SVG' || tag === 'path' || tag === 'IFRAME' || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'VIDEO') continue;
         if (isChrome(el)) continue;
         if (dkSeen) dkSeen.add(el);
