@@ -196,6 +196,9 @@
     rest.id = 'wq-home3-css';
     rest.textContent =
       P + NAVY + WS + NAVY_B + TS + NAVY + JN + NAVY_B +
+      // الفواصل بين الأقسام كانت تُظهر خلفية الصفحة البيضاء
+      '#preview-container{background:#001B3E!important}' +
+      '#preview-container .wq-div{background:linear-gradient(180deg,#04173a,#001B3E)!important}' +
       // عناوين مشتركة
       P + ' .wqh-h,' + JN + ' .wqh-h{color:#fff!important;text-shadow:0 0 30px rgba(79,140,255,.35)}' +
       P + ' .wqh-h b,' + JN + ' .wqh-h b{color:#8db8f2!important}' +
