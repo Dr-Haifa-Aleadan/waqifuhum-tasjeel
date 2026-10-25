@@ -37,6 +37,9 @@
           if (box) box.style.display = 'none';
         }
       }
+      // إن «استولى» إطار الصفحة على عنصرنا وأعاد كتابته، لم يعد لنا: نزيل العلامة ونضيف عنصرًا جديدًا
+      var mine = ul.querySelectorAll('li.wq-mz-li');
+      for (var m2 = 0; m2 < mine.length; m2++) { if ((mine[m2].textContent || '').indexOf('أهل الميزان') < 0) mine[m2].classList.remove('wq-mz-li'); }
       if (ul.querySelector('li.wq-mz-li')) continue;
       var ref = null;
       for (var k = 0; k < ul.children.length; k++) {
@@ -71,7 +74,9 @@
       (first ? first.parentNode : a).appendChild(d);
       var links2 = li.querySelectorAll('a');
       for (var q = 0; q < links2.length; q++) { links2[q].setAttribute('href', PAGE); links2[q].removeAttribute('target'); links2[q].setAttribute('aria-label', 'أهل الميزان'); }
-      ref.parentNode.insertBefore(li, ref);
+      // يُضاف في آخر القائمة (لا في وسطها) حتى لا تُزاح عناصر الموقع عن مواضعها فيُسقطها إطار الصفحة،
+      // ويُعرض قبل «فريق التدريب» بخاصية order في التنسيق
+      ul.appendChild(li);
     }
   }
 
@@ -274,6 +279,13 @@
   /* ---------- الصفحات الداخلية: تحويل الأقسام الفاتحة إلى كحلي زجاجي ---------- */
   var DARK_RE = /^\/(about-us|contact-us|training-team|our-products)\/?$/;
   var IS_DARK_PAGE = DARK_RE.test(location.pathname);
+  (function () {
+    var nc = document.createElement('style');
+    nc.id = 'wq-nav-order';
+    nc.textContent = 'ul li.wq-mz-li{order:1}' +
+      'ul li:has(a[href*="training-team"]):not(.wq-mz-li),ul li:has(a[href*="training-team"]) ~ li:not(.wq-mz-li){order:2}';
+    (document.head || document.documentElement).appendChild(nc);
+  })();
   // قبل أن يكتمل التحويل نُخفي أقسام المحتوى (والخلفية كحلية) حتى لا تظهر الألوان القديمة لحظة التحديث
   if (IS_DARK_PAGE) {
     document.documentElement.classList.add('wq-dk-wait');
