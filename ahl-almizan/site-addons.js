@@ -195,6 +195,7 @@
     var rest = document.createElement('style');
     rest.id = 'wq-home3-css';
     rest.textContent =
+      '#custom-code-U_K6qWM9ZY .relative.bg-white:not(:has(.wq-phone)) > *{visibility:hidden!important}' +
       P + NAVY + WS + NAVY_B + TS + NAVY + JN + NAVY_B +
       // الفواصل بين الأقسام كانت تُظهر خلفية الصفحة البيضاء
       '#preview-container{background:#001B3E!important}' +
@@ -273,6 +274,18 @@
   /* ---------- الصفحات الداخلية: تحويل الأقسام الفاتحة إلى كحلي زجاجي ---------- */
   var DARK_RE = /^\/(about-us|contact-us|training-team|our-products)\/?$/;
   var IS_DARK_PAGE = DARK_RE.test(location.pathname);
+  // قبل أن يكتمل التحويل نُخفي أقسام المحتوى (والخلفية كحلية) حتى لا تظهر الألوان القديمة لحظة التحديث
+  if (IS_DARK_PAGE) {
+    document.documentElement.classList.add('wq-dk-wait');
+    var veil = document.createElement('style');
+    veil.id = 'wq-dk-veil';
+    veil.textContent = 'html,body{background:#001B3E!important}' +
+      '#section--O9UgSaDmM{background:rgba(255,255,255,.9)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}' +
+      '#preview-container .c-section:not(#section--O9UgSaDmM):not(#section-0FyjcBSLx4):not(#section-RHoFYtH5zD){transition:opacity .35s ease}' +
+      'html.wq-dk-wait #preview-container .c-section:not(#section--O9UgSaDmM):not(#section-0FyjcBSLx4):not(#section-RHoFYtH5zD){opacity:0!important}';
+    (document.head || document.documentElement).appendChild(veil);
+    setTimeout(function () { document.documentElement.classList.remove('wq-dk-wait'); }, 4000);
+  }
   function rgbaOf(s) {
     var m = /rgba?\(([^)]+)\)/.exec(s || '');
     if (!m) return null;
@@ -585,6 +598,34 @@
       '#wfRunner{background:#8db8f2!important;box-shadow:0 0 12px rgba(141,184,242,.9)!important}';
     (document.head || document.documentElement).appendChild(wfc);
   }
+  /* الهاتف ثلاثي الأبعاد في الواجهة (.wq-phone): يبنيه كود الواجهة wqc مرة واحدة داخل عنصر
+     custom-code-U_K6qWM9ZY، ثم قد يعيد إطار الصفحة رسم العنصر فيرجع الهاتف القديم «التعلم الشرعي».
+     نعيد بناء الهاتف الجديد بالجزء نفسه من كود الواجهة كلما غاب. */
+  var WQC_SRC = 'https://assets.cdn.filesafe.space/gAeAVJru7tUQGvAFE972/media/6ad5e06ccd7225ed37e58f7f.css';
+  var phoneFn = null, phoneLoading = false;
+  function ensurePhone() {
+    if (!IS_HOME) return;
+    var shell = document.querySelector('#custom-code-U_K6qWM9ZY .relative.bg-white');
+    if (!shell || shell.querySelector('.wq-phone')) return;
+    if (phoneFn) {
+      var old = document.querySelectorAll('#custom-code-U_K6qWM9ZY .wq-fl');
+      for (var i = 0; i < old.length; i++) old[i].parentNode.removeChild(old[i]);
+      try { phoneFn(); } catch (e) {}
+      return;
+    }
+    if (phoneLoading || !window.fetch) return;
+    phoneLoading = true;
+    fetch(WQC_SRC).then(function (r) { return r.text(); }).then(function (t) {
+      var a = t.indexOf('/* phone */'), b = a > -1 ? t.indexOf('/*', a + 12) : -1;
+      if (a < 0 || b < 0) return;
+      var head = 'var RM=false;try{RM=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}' +
+        'var MOB=innerWidth<768;var LOGO=(document.querySelector("#section--O9UgSaDmM img")||{}).src||"";';
+      phoneFn = new Function(head + t.slice(a, b));
+      phoneLoading = false;
+      ensurePhone();
+    }).catch(function () { phoneLoading = false; });
+  }
+
   function restartWorkflow() {
     if (!IS_HOME || window.__wqWfRestarted) return;
     var w = document.getElementById('custom-code-U_K6qWM9ZY');
@@ -651,9 +692,23 @@
   var navReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} try { fixHubDark(); } catch (err11) {} }
+    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
+    try { fixHubDark(); } catch (err11) {}
   }
-  function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
+  function hyDone() {
+    try { if (window.useNuxtApp) { var na = window.useNuxtApp(); if (na && na.isHydrating) return false; } } catch (e) {}
+    return document.readyState === 'complete';
+  }
+  function unveil() { document.documentElement.classList.remove('wq-dk-wait'); }
+  function armNav() {
+    var t0 = Date.now();
+    (function poll() {
+      if (hyDone() || Date.now() - t0 > 1800) {
+        setTimeout(function () { navReady = true; run(); unveil(); try { fixHashOnLoad(); } catch (e4) {} }, 200);
+        setTimeout(run, 1800);
+      } else setTimeout(poll, 50);
+    })();
+  }
   if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
 
   var n = 0;
