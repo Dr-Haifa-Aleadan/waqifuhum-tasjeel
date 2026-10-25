@@ -19,6 +19,27 @@
   function isChrome(el) {
     return el.closest('#section-RHoFYtH5zD, nav, .nav-menu, .c-header, header, iframe, form, .form-builder, .ep-iFrameContainer, #wq-hub');
   }
+  // أيقونات صغيرة داكنة بخلفية شفافة: تصبح فاتحة بتوهج أزرق (الصور والمربعات المعتمة تبقى كما هي)
+  function dkIcon(im) {
+    if (im.dataset.wqDkI) return;
+    var w = im.getBoundingClientRect().width;
+    if (!w || w > 96) return;
+    im.dataset.wqDkI = '1';
+    var t = new Image();
+    t.crossOrigin = 'anonymous';
+    t.onload = function () {
+      try {
+        var c = document.createElement('canvas'); c.width = c.height = 24;
+        var x = c.getContext('2d'); x.drawImage(t, 0, 0, 24, 24);
+        var d = x.getImageData(0, 0, 24, 24).data, n = 0, L = 0;
+        for (var k = 0; k < d.length; k += 4) { if (d[k + 3] > 40) { n++; L += (d[k] * 0.2126 + d[k + 1] * 0.7152 + d[k + 2] * 0.0722) / 255; } }
+        if (n && n / 576 < 0.6 && L / n < 0.45) {
+          im.style.setProperty('filter', 'brightness(0) invert(1) drop-shadow(0 0 8px rgba(141,184,242,.75))', 'important');
+        }
+      } catch (e) {}
+    };
+    t.src = im.currentSrc || im.src;
+  }
   function fixDarkPage() {
     if (!IS_DARK_PAGE) return;
     if (!document.getElementById('wq-dark-css')) {
@@ -32,7 +53,7 @@
     var secs = document.querySelectorAll('#preview-container .c-section');
     for (var i = 0; i < secs.length; i++) {
       var sec = secs[i];
-      if (sec.id === 'section-RHoFYtH5zD' || sec.querySelector('nav, .nav-menu')) continue;
+      if (sec.id === 'section-RHoFYtH5zD' || sec.id === 'section--O9UgSaDmM' || sec.id === 'section-0FyjcBSLx4' || sec.querySelector('nav, .nav-menu, [class*="menu-item"]')) continue;
       var sb = rgbaOf(getComputedStyle(sec).backgroundColor);
       if (!(sb && sb.a > 0.2 && lum(sb) < 0.35)) {
         // قسم فاتح أو شفاف فوق خلفية فاتحة
@@ -50,7 +71,8 @@
         var el = els[j];
         if (dkSeen && dkSeen.has(el)) continue;
         var tag = el.tagName;
-        if (tag === 'IMG' || tag === 'svg' || tag === 'SVG' || tag === 'path' || tag === 'IFRAME' || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'VIDEO') continue;
+        if (tag === 'IMG') { dkIcon(el); continue; }
+        if (tag === 'svg' || tag === 'SVG' || tag === 'path' || tag === 'IFRAME' || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'VIDEO') continue;
         if (isChrome(el)) continue;
         if (dkSeen) dkSeen.add(el);
         var cs = getComputedStyle(el);
