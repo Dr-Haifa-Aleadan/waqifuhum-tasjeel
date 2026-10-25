@@ -247,6 +247,29 @@
     (document.head || document.documentElement).appendChild(rest);
   }
 
+
+  // ظهور البطاقات عند التمرير: كود الواجهة يراقب العناصر مرة واحدة، وإطار الصفحة قد يعيد بناءها
+  // (خصوصًا على الجوال) فتبقى مخفية. نراقب كل عنصر .wq-rv لم يظهر بعد، ولو أُعيد بناؤه.
+  var rvIO = null;
+  function fixReveal() {
+    var els = document.querySelectorAll('.wq-rv:not(.wq-in)');
+    if (!els.length) return;
+    if (!rvIO && 'IntersectionObserver' in window) {
+      rvIO = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('wq-in'); rvIO.unobserve(e.target); } });
+      }, { threshold: 0.05 });
+    }
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (!rvIO) { el.classList.add('wq-in'); continue; }
+      var r = el.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) { el.classList.add('wq-in'); continue; }
+      if (el.__wqRv) continue;
+      el.__wqRv = 1;
+      rvIO.observe(el);
+    }
+  }
+
   // الملف العام يضع على الشارات ألوانًا فاتحة مباشرة (!important)، فنعيدها زجاجية في الأقسام الداكنة
   function fixDarkInline() {
     if (!IS_HOME) return;
@@ -475,13 +498,15 @@
   var navReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} }
+    if (navReady) { try { fixNav(); } catch (err2) {} try { fixWhy(); } catch (err3) {} try { restartWorkflow(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} }
   }
   function armNav() { setTimeout(function () { navReady = true; run(); try { fixHashOnLoad(); } catch (e4) {} }, 1800); }
   if (document.readyState === 'complete') armNav(); else window.addEventListener('load', armNav);
 
   var n = 0;
   var iv = setInterval(function () { run(); if (++n > 30) clearInterval(iv); }, 700);
+  var rvT = 0;
+  addEventListener('scroll', function () { if (rvT) return; rvT = setTimeout(function () { rvT = 0; try { fixReveal(); } catch (e9) {} }, 150); }, { passive: true });
   if (window.MutationObserver) {
     var t = null;
     new MutationObserver(function () {
