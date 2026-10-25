@@ -271,7 +271,7 @@
   }
 
   /* ---------- الصفحات الداخلية: تحويل الأقسام الفاتحة إلى كحلي زجاجي ---------- */
-  var DARK_RE = /^\/(about-us|contact-us|training-team)\/?$/;
+  var DARK_RE = /^\/(about-us|contact-us|training-team|our-products|free-kits|resources)\/?$/;
   var IS_DARK_PAGE = DARK_RE.test(location.pathname);
   function rgbaOf(s) {
     var m = /rgba?\(([^)]+)\)/.exec(s || '');
