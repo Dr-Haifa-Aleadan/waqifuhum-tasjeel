@@ -323,7 +323,7 @@
     var secs = document.querySelectorAll('#preview-container .c-section');
     for (var i = 0; i < secs.length; i++) {
       var sec = secs[i];
-      if (sec.id === 'section-RHoFYtH5zD' || sec.id === 'section--O9UgSaDmM' || sec.id === 'section-0FyjcBSLx4' || sec.querySelector('nav, .nav-menu, [class*="menu-item"]')) continue;
+      if (sec.id === 'section-RHoFYtH5zD' || sec.id === 'section--O9UgSaDmM' || sec.id === 'section-0FyjcBSLx4' || (sec.getBoundingClientRect().top + scrollY < 60 && sec.querySelector('.nav-menu, [class*="menu-item"]'))) continue;
       var sb = rgbaOf(getComputedStyle(sec).backgroundColor);
       if (!(sb && sb.a > 0.2 && lum(sb) < 0.35)) {
         // قسم فاتح أو شفاف فوق خلفية فاتحة
