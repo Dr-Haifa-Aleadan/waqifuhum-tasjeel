@@ -633,7 +633,34 @@
      custom-code-U_K6qWM9ZY، ثم قد يعيد إطار الصفحة رسم العنصر فيرجع الهاتف القديم «التعلم الشرعي».
      نعيد بناء الهاتف الجديد بالجزء نفسه من كود الواجهة كلما غاب. */
   var WQC_SRC = 'https://assets.cdn.filesafe.space/gAeAVJru7tUQGvAFE972/media/6ad5e06ccd7225ed37e58f7f.css';
-  var phoneFn = null, phoneLoading = false;
+  var phoneFn = null, phoneLoading = false, stageFn = null, wqcSrc = null;
+  function wqcHead() {
+    return 'var RM=false;try{RM=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}' +
+      'var MOB=innerWidth<768;var LOGO=(document.querySelector("#section--O9UgSaDmM img")||{}).src||"";' +
+      'var hero=document.getElementById("section--LgraI6xg3");';
+  }
+  // خلفية الواجهة السينمائية (.wqc-stage: الأقواس والغبار الضوئي) يضيفها كود الواجهة مرة واحدة؛
+  // إن أعاد إطار الصفحة رسم قسم الواجهة اختفت وصارت الخلفية سادة، فنعيد بناءها بالجزء نفسه من الكود.
+  function ensureStage() {
+    if (!IS_HOME) return;
+    var hero = document.getElementById('section--LgraI6xg3');
+    if (!hero || hero.querySelector('.wqc-stage')) return;
+    if (stageFn) { try { stageFn(); } catch (e) {} return; }
+    if (wqcSrc) {
+      var a = wqcSrc.indexOf('/* stage */'), b = wqcSrc.indexOf('/* hero elements */');
+      if (a > -1 && b > a) { stageFn = new Function(wqcHead() + 'if(!hero||hero.querySelector(".wqc-stage"))return;' + wqcSrc.slice(a, b)); ensureStage(); }
+      return;
+    }
+    loadWqc();
+  }
+  function loadWqc() {
+    if (phoneLoading || wqcSrc || !window.fetch) return;
+    phoneLoading = true;
+    fetch(WQC_SRC).then(function (r) { return r.text(); }).then(function (t) {
+      wqcSrc = t; phoneLoading = false;
+      ensurePhone(); ensureStage();
+    }).catch(function () { phoneLoading = false; });
+  }
   function ensurePhone() {
     if (!IS_HOME) return;
     var shell = document.querySelector('#custom-code-U_K6qWM9ZY .relative.bg-white');
@@ -644,17 +671,12 @@
       try { phoneFn(); } catch (e) {}
       return;
     }
-    if (phoneLoading || !window.fetch) return;
-    phoneLoading = true;
-    fetch(WQC_SRC).then(function (r) { return r.text(); }).then(function (t) {
-      var a = t.indexOf('/* phone */'), b = a > -1 ? t.indexOf('/*', a + 12) : -1;
-      if (a < 0 || b < 0) return;
-      var head = 'var RM=false;try{RM=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}' +
-        'var MOB=innerWidth<768;var LOGO=(document.querySelector("#section--O9UgSaDmM img")||{}).src||"";';
-      phoneFn = new Function(head + t.slice(a, b));
-      phoneLoading = false;
-      ensurePhone();
-    }).catch(function () { phoneLoading = false; });
+    if (wqcSrc) {
+      var a = wqcSrc.indexOf('/* phone */'), b = a > -1 ? wqcSrc.indexOf('/*', a + 12) : -1;
+      if (a > -1 && b > a) { phoneFn = new Function(wqcHead() + wqcSrc.slice(a, b)); ensurePhone(); }
+      return;
+    }
+    loadWqc();
   }
 
   function restartWorkflow() {
@@ -725,7 +747,7 @@
   var menuReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { if (menuReady) { try { fixNav(); } catch (err2) {} } try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
+    if (navReady) { if (menuReady) { try { fixNav(); } catch (err2) {} } try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { ensureStage(); } catch (err13) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
     try { fixHubDark(); } catch (err11) {} try { fixKitsSoul(); } catch (err12) {}
   }
   function hyDone() {
