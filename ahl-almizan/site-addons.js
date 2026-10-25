@@ -514,6 +514,23 @@
     sr.appendChild(st);
   }
 
+
+  /* شاشة التحميل الأصلية تُزال بسكربتها بعد حدث load بـ٢٫٦ ثانية. إن أعاد إطار الصفحة رسم عنصر الكود
+     بعد ذلك عادت الشاشة ولا شيء يزيلها فتغطي الصفحة. بعد ٤٫٥ ثوانٍ من load نزيل أي نسخة باقية بتلاشٍ. */
+  var plDone = false;
+  function fixPreloader() {
+    if (!plDone) return;
+    var el = document.getElementById('waqifuhum-preloader');
+    if (!el || el.__wqGone) return;
+    el.__wqGone = 1;
+    el.style.transition = 'opacity .5s ease';
+    el.style.opacity = '0';
+    el.style.pointerEvents = 'none';
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 550);
+  }
+  function armPreloader() { setTimeout(function () { plDone = true; fixPreloader(); }, 4500); }
+  if (document.readyState === 'complete') armPreloader(); else window.addEventListener('load', armPreloader);
+
   // الملف العام يضع على الشارات ألوانًا فاتحة مباشرة (!important)، فنعيدها زجاجية في الأقسام الداكنة
   function fixDarkInline() {
     if (!IS_HOME) return;
@@ -795,6 +812,7 @@
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
     if (navReady) { if (menuReady) { try { fixNav(); } catch (err2) {} try { fixResLink(); } catch (err14) {} } try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { ensureStage(); } catch (err13) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
+    try { fixPreloader(); } catch (err15) {}
     try { fixHubDark(); } catch (err11) {} try { fixKitsSoul(); } catch (err12) {}
   }
   function hyDone() {
