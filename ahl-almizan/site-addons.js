@@ -371,6 +371,15 @@
         if (cs.backgroundImage && cs.backgroundImage !== 'none' && /url\(/.test(cs.backgroundImage) && el.classList.contains('c-row')) {
           el.style.setProperty('background-image', 'none', 'important');
         }
+        // أيقونات الخطوط (fa) والحدود الفاتحة
+        if (tag === 'I' && !el.childNodes.length) {
+          var ic = rgbaOf(cs.color);
+          if (ic && lum(ic) < 0.5) el.style.setProperty('color', '#8db8f2', 'important');
+        }
+        if (parseFloat(cs.borderTopWidth) > 0) {
+          var bc = rgbaOf(cs.borderTopColor);
+          if (bc && bc.a > 0.3 && lum(bc) > 0.75) el.style.setProperty('border-color', 'rgba(141,184,242,.25)', 'important');
+        }
         // النص الداكن يصبح فاتحًا
         var hasText = false;
         for (var k = 0; k < el.childNodes.length; k++) {
