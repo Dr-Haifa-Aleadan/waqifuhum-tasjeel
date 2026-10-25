@@ -25,6 +25,40 @@
 
   function txt(el) { return (el && el.textContent || '').replace(/\s+/g, ' ').trim(); }
 
+
+  // «مركز المصادر»: إطار الصفحة يحذفه من قائمة الرئيسية بعد التحميل؛ نعيده بنسخة من عنصر «الهدايا المجانية»
+  function fixResLink() {
+    var uls = document.querySelectorAll('ul.nav-menu-ul, ul[class*="nav-menu"]');
+    for (var i = 0; i < uls.length; i++) {
+      var ul = uls[i], ref = null, has = false;
+      for (var k = 0; k < ul.children.length; k++) {
+        var a0 = ul.children[k].querySelector('a');
+        if (!a0) continue;
+        var t0 = txt(a0);
+        if (t0 === 'مركز المصادر' || /\/resources\/?$/.test(a0.getAttribute('href') || '')) has = true;
+        if (t0 === 'الهدايا المجانية') ref = ul.children[k];
+      }
+      if (has || !ref) continue;
+      var li = ref.cloneNode(true);
+      li.classList.add('wq-res-li');
+      li.classList.remove('wq-mz-li');
+      li.removeAttribute('id');
+      var ids = li.querySelectorAll('[id]');
+      for (var r = 0; r < ids.length; r++) ids[r].removeAttribute('id');
+      var subs = li.querySelectorAll('ul');
+      for (var s2 = 0; s2 < subs.length; s2++) subs[s2].parentNode.removeChild(subs[s2]);
+      var as = li.querySelectorAll('a');
+      if (!as.length) continue;
+      for (var q = 0; q < as.length; q++) { as[q].setAttribute('href', 'https://waqifuhum.com/resources'); as[q].removeAttribute('target'); as[q].setAttribute('aria-label', 'مركز المصادر'); }
+      var walker = document.createTreeWalker(li, NodeFilter.SHOW_TEXT, null), tn, first = null;
+      while ((tn = walker.nextNode())) {
+        if (!tn.nodeValue.trim()) continue;
+        if (!first) { first = tn; tn.nodeValue = 'مركز المصادر'; } else tn.nodeValue = '';
+      }
+      if (!first) as[0].textContent = 'مركز المصادر';
+      ul.appendChild(li);
+    }
+  }
   function fixNav() {
     var uls = document.querySelectorAll('ul.nav-menu-ul, ul[class*="nav-menu"]');
     for (var i = 0; i < uls.length; i++) {
@@ -283,7 +317,8 @@
     var nc = document.createElement('style');
     nc.id = 'wq-nav-order';
     nc.textContent = 'ul li.wq-mz-li{order:1}' +
-      'ul li:has(a[href*="training-team"]):not(.wq-mz-li),ul li:has(a[href*="training-team"]) ~ li:not(.wq-mz-li){order:2}';
+      'ul li:has(a[href*="training-team"]):not(.wq-mz-li),ul li:has(a[href*="training-team"]) ~ li:not(.wq-mz-li){order:2}' +
+      'ul li.wq-res-li{order:3}ul li:has(a[href*="free-kits"]):not(.wq-res-li):not(.wq-mz-li){order:4}';
     (document.head || document.documentElement).appendChild(nc);
   })();
   // قبل أن يكتمل التحويل نُخفي أقسام المحتوى (والخلفية كحلية) حتى لا تظهر الألوان القديمة لحظة التحديث
@@ -759,7 +794,7 @@
   var menuReady = false;
   function run() {
     try { fixRibbon(); fixButton(); fixHubNav(); fixPill(); } catch (err) {}
-    if (navReady) { if (menuReady) { try { fixNav(); } catch (err2) {} } try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { ensureStage(); } catch (err13) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
+    if (navReady) { if (menuReady) { try { fixNav(); } catch (err2) {} try { fixResLink(); } catch (err14) {} } try { fixWhy(); } catch (err3) {} try { ensurePhone(); } catch (err5) {} try { ensureStage(); } catch (err13) {} try { fixFooter(); } catch (err6) {} try { fixDarkInline(); } catch (err7) {} try { fixReveal(); } catch (err8) {} try { fixDarkPage(); } catch (err10) {} }
     try { fixHubDark(); } catch (err11) {} try { fixKitsSoul(); } catch (err12) {}
   }
   function hyDone() {
